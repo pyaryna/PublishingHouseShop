@@ -16,4 +16,8 @@
     <ProjectReference Include="..\PublishingHouse.BLL\PublishingHouse.BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>
