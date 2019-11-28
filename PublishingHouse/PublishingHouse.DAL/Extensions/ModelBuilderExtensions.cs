@@ -133,6 +133,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 1,
                         Title = "Прошу коротко: розмова з Карелом Гвіждялою, примітки, документи",
+                        ImageUrl = "~/images/Gavel_.png",
                         Language = "українська",
                         Year = 2016,
                         Format = "70х100/16 ",
@@ -145,6 +146,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 2,
                         Title = "Сибірський семестр: пригоди, спогади, роздуми студзагонівців",
+                        ImageUrl = "~/images/Studzagony_.png",
                         Language = "українська",
                         Year = 2018,
                         Format = "60х90/16",
@@ -157,6 +159,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 3,
                         Title = "Когда сердце плачет, или Казнь одержимости",
+                        ImageUrl = "~/images/Bezuglyy_.png",
                         Language = "російська",
                         Year = 2017,
                         Format = "60х90/16",
@@ -169,6 +172,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 4,
                         Title = "Отдых по пятницам",
+                        ImageUrl = "~/images/Bezuglyy_2.png",
                         Language = "російська",
                         Year = 2018,
                         Format = "60х84/16",
@@ -181,6 +185,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 5,
                         Title = "Таємниця Святоюрської гори: книга перша",
+                        ImageUrl = "~/images/Bogdanovich_.png",
                         Language = "українська",
                         Year = 2017,
                         Format = "60х90/16",
@@ -193,6 +198,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 6,
                         Title = "Таємниця Святоюрської гори: книга друга",
+                        ImageUrl = "~/images/Bogdanovich_2.png",
                         Language = "українська",
                         Year = 2019,
                         Format = "60х90/16",
@@ -205,6 +211,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 7,
                         Title = "Скоропадський, Маннергейм, Врангель: кавалеристи-державники",
+                        ImageUrl = "~/images/Shurhalo_2_.png",
                         Language = "українська",
                         Year = 2013,
                         Format = "60х84/8",
@@ -217,6 +224,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 8,
                         Title = "Міфи Другої світової війни",
+                        ImageUrl = "~/images/Shurhalo_.png",
                         Language = "українська",
                         Year = 2011,
                         Format = "60х84/8",
@@ -229,6 +237,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 9,
                         Title = "Місто виноградних слимаків",
+                        ImageUrl = "~/images/ravlik.jpg",
                         Language = "українська",
                         Year = 2018,
                         Format = "70х84/16",
@@ -241,6 +250,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 10,
                         Title = "Застрелити шпака",
+                        ImageUrl = "~/images/Lozynskyy_.png",
                         Language = "українська",
                         Year = 2017,
                         Format = "70х100/32",
@@ -253,6 +263,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 11,
                         Title = "Мелодія сердця",
+                        ImageUrl = "~/images/Kostenko_.png",
                         Language = "українська",
                         Year = 2017,
                         Format = "60х84/16",
@@ -265,6 +276,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 12,
                         Title = "Кохання струни золоті",
+                        ImageUrl = "~/images/Struny_.png",
                         Language = "українська",
                         Year = 2015,
                         Format = "60х84/32",
@@ -277,6 +289,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 13,
                         Title = "Енциклопедія афоризмів, крилатих фраз, цитат",
+                        ImageUrl = "~/images/2011Encyclopedia_.png",
                         Language = "українська",
                         Year = 2011,
                         Format = "60х84/8",
@@ -289,6 +302,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 14,
                         Title = "Практична стилістика української мови",
+                        ImageUrl = "~/images/kapeluh_.png",
                         Language = "українська",
                         Year = 2007,
                         Format = "60х84/16",
@@ -301,6 +315,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 15,
                         Title = "Редагування в засобах масової інформації",
+                        ImageUrl = "~/images/Kapeluh_zmi_.png",
                         Language = "українська",
                         Year = 2009,
                         Format = "70х100/16",
@@ -313,6 +328,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 16,
                         Title = "Телебачення прямого ефіру: практика мовлення, типові помилки",
+                        ImageUrl = "~/images/Kapeluh_tv_.png",
                         Language = "українська",
                         Year = 2011,
                         Format = "70х100/16",
@@ -325,6 +341,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 17,
                         Title = "Телевізійна журналістика",
+                        ImageUrl = "~/images/Dmytrovsky_.png",
                         Language = "українська",
                         Year = 2009,
                         Format = "60х84/16 ",
@@ -337,6 +354,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 18,
                         Title = "Інтернет-журналістика",
+                        ImageUrl = "~/images/potjatynyk_.png",
                         Language = "українська",
                         Year = 2010,
                         Format = "60х84/16",
@@ -349,6 +367,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 19,
                         Title = "Соціологія і журналістика",
+                        ImageUrl = "~/images/Lubkovich_.png",
                         Language = "українська",
                         Year = 2013,
                         Format = "60х84/16 ",
@@ -361,6 +380,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 20,
                         Title = "Соціальна психологія масової комунікації",
+                        ImageUrl = "~/images/Lubkovich_com_.png",
                         Language = "українська",
                         Year = 2013,
                         Format = "60х84/16 ",
@@ -373,6 +393,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 21,
                         Title = "Теорія і методика журналістської творчості",
+                        ImageUrl = "~/images/zdorovega_.png",
                         Language = "українська",
                         Year = 2008,
                         Format = "60х84/16",
@@ -385,6 +406,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 22,
                         Title = "Журналистика и культура: динамика взаимодействия",
+                        ImageUrl = "~/images/Marjna_.png",
                         Language = "російська",
                         Year = 2013,
                         Format = "60х84/16",
@@ -397,6 +419,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 23,
                         Title = "Сучасний англомовний світ і збагачення словникового складу",
+                        ImageUrl = "~/images/zacnyj_.png",
                         Language = "українська",
                         Year = 2007,
                         Format = "60х84/16",
@@ -409,6 +432,7 @@ namespace PublishingHouse.DAL.Extensions
                     {
                         Id = 24,
                         Title = "Велика Британія: географія, історія, культура",
+                        ImageUrl = "~/images/GreateBritain_.png",
                         Language = "українська",
                         Year = 2012,
                         Format = "60х84/16",

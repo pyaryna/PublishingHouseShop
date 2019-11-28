@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PublishingHouse.DAL
 {
-    class PublishingHouseUnitOfWork: IPublishingHouseUnitOfWork
+    public class PublishingHouseUnitOfWork: IPublishingHouseUnitOfWork
     {
         private readonly PublishingHouseContext _context;
 

@@ -197,10 +197,11 @@ footer{
 
 }
 
-.card-title{
+.card-title a, .card-title a:hover{
     font-family: MontserratAlternates;
     font-size: 1.1rem;
     height: 4rem;
+    color: #000000;
 }
 
 @media all and (min-width: 600px) and (max-width: 1200px) {

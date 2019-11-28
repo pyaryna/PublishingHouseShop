@@ -5,22 +5,31 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PublishingHouse.BLL.Interfaces;
 using PublishingHouse.Models;
 
 namespace PublishingHouse.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private IBookService _bookService;
+        //private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        //public HomeController(ILogger<HomeController> logger)
+        //{
+        //    _logger = logger;
+        //}
+
+        public HomeController(IBookService bookService)
         {
-            _logger = logger;
+            _bookService = bookService;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var books = await _bookService.GetDishesInfoAsync();
+            return View(books);
         }
 
         public IActionResult Privacy()

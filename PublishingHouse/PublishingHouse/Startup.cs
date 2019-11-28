@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +13,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PublishingHouse.BLL;
+using PublishingHouse.BLL.Interfaces;
+using PublishingHouse.BLL.MappingProfilers;
+using PublishingHouse.BLL.Services;
 using PublishingHouse.DAL;
 
 namespace PublishingHouse
@@ -24,9 +31,10 @@ namespace PublishingHouse
         }
 
         public IConfiguration Configuration { get; }
+        public ILifetimeScope AutofacContainer { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<PublishingHouseContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("PublishingHouseDb")));
@@ -35,6 +43,17 @@ namespace PublishingHouse
                 .AddEntityFrameworkStores<PublishingHouseContext>();
 
             services.AddControllersWithViews();
+
+            services.AddAutoMapper(typeof(BookProfile).Assembly);
+
+            var builder = new ContainerBuilder();
+            builder.Populate(services);
+
+            builder.RegisterModule<BLLDependencyModule>();
+
+            AutofacContainer = builder.Build();
+
+            return new AutofacServiceProvider(AutofacContainer);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
