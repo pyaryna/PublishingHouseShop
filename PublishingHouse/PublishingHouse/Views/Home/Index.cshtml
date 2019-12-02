@@ -7,14 +7,19 @@
             <div class="col-md-3 padding">
                 <div class="card">
                     <div class="card-header">
-                        <a href=#><img src=@book.ImageUrl class="card-img-top" asp-append-version="true" /></a>                        
+                        <a asp-controller="Home" asp-action="Details" asp-route-id="@book.Id">
+                            <img src=@book.ImageUrl class="card-img-top" asp-append-version="true" alt="book image"/>
+                        </a>                        
                     </div>
                     <div class="card-body">
-                        <h4 class="card-title"><a href=# class="active">@book.Title</a></h4>
-                        <p class="card-text">@book.Price</p>
-                        <button class="btn detal" data-toggle="modal" data-target="#gavel">
-                            Детальніше
-                        </button>
+                        <h4 class="card-title">
+                            <a asp-controller="Home" asp-action="Details" asp-route-id="@book.Id">@book.Title</a>
+                        </h4>
+                        <p class="card-text">@book.Price грн</p>
+                        <!--<button class="btn detal" data-toggle="modal" data-target="#gavel">
+                            У КОШИК
+                        </button>-->
+                        <a href=#><i class="fas fa-shopping-cart"></i></a>
                     </div>
                 </div>                
             </div>

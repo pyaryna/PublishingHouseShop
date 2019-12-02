@@ -8,6 +8,7 @@ namespace PublishingHouse.DAL.Interfaces.Repositories
 {
     public interface IBookRepository : IRepository<Book, int>
     {
+        Task<Book> FindAsync(int key);
         Task<IEnumerable<Book>> GetAllBooksAsync(int? skip, int? take);
     }
 }

@@ -11,7 +11,14 @@ namespace PublishingHouse.BLL.MappingProfilers
     {
         public BookProfile()
         {
-            CreateMap<Book, BookPreviewDto>();
+            CreateMap<Book, BookPreviewDto>()
+                .ReverseMap();
+
+            CreateMap<Book, BookDto>()
+                .ForMember(b => b.Authors, opt => opt.MapFrom(x => x.BookAuthors))
+                .ForMember(b => b.Categories, opt => opt.MapFrom(x => x.BookCategories))
+                .ForMember(b => b.Comments, opt => opt.MapFrom(x => x.Comments));
+                //.ReverseMap();
         }        
     }
 }

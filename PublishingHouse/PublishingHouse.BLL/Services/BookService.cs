@@ -24,12 +24,16 @@ namespace PublishingHouse.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<BookPreviewDto>> GetDishesInfoAsync()
+        public async Task<IEnumerable<BookPreviewDto>> GetAllBooksInfoAsync()
         {
             IEnumerable<Book> books = await _unitOfWork.Books.GetAllBooksAsync(null, null);
 
             return books.Select(_mapper.Map<Book, BookPreviewDto>)
                 .ToArray();            
+        }
+        public async Task<BookDto> GetOneBookInfoAsync(int id) 
+        {
+            return _mapper.Map<Book, BookDto>(await _unitOfWork.Books.FindAsync(id));
         }
     }
 }

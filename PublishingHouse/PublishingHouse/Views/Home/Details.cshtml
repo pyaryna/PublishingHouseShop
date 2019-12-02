@@ -1,0 +1,27 @@
+﻿@model PublishingHouse.BLL.DTOs.BookDto
+
+<div class="container book-details">
+    <h4 class="modal-title">@Model.Title</h4>
+    <img src=@Model.ImageUrl class="padding" alt="book image" asp-append-version="true" />
+    <p>
+        Автор:
+        @foreach (var author in @Model.Authors)
+        {
+            @author.Name<br>
+        }
+        Мова видання: @Model.Language<br>
+        Рік видання: @Model.Year<br>
+        Формат: @Model.Format<br>
+        Палітурка: @Model.Cover<br>
+        Обсяг: @Model.PagesAmount с.
+    </p>
+    <p>
+        @Model.Description
+    </p>
+    <p>
+        Ціна: @Model.Price грн
+    </p>
+    <button class="btn btn-danger">
+        КУПИТИ
+    </button>
+</div>

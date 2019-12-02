@@ -70,7 +70,7 @@ namespace PublishingHouse
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
-            app.UseDefaultFiles();
+            //app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseRouting();

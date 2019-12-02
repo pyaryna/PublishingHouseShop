@@ -40,12 +40,11 @@ namespace PublishingHouse.DAL.Repositories
                 .RemoveRange(items);
         }
 
-        public virtual async Task<TEntity> FindAsync(TKey key)
-        {
-            //return await Context.Set<TEntity>()
-            //    .FirstOrDefaultAsync(x => x.Id.Equals(key));
-            throw new NotImplementedException();
-        }
+        //public virtual async Task<TEntity> FindAsync(TKey key)
+        //{
+        //    return await Context.Set<TEntity>()
+        //        .FirstOrDefaultAsync(x => x.Id.Equals(key));
+        //}
 
         public virtual async Task<IEnumerable<TEntity>> GetAsync() =>
             await Context.Set<TEntity>()

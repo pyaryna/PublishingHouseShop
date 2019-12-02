@@ -28,10 +28,16 @@ namespace PublishingHouse.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var books = await _bookService.GetDishesInfoAsync();
+            var books = await _bookService.GetAllBooksInfoAsync();
             return View(books);
         }
 
+        
+        public async Task<IActionResult> Details(int id)
+        {
+            var book = await _bookService.GetOneBookInfoAsync(id);
+            return View(book);
+        }
         public IActionResult Privacy()
         {
             return View();

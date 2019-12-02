@@ -7,7 +7,7 @@ namespace PublishingHouse.DAL.Interfaces.Repositories
 {
     public interface IRepository<TEntity, in TKey> where TEntity : class//, IIdentifiable<TKey>
     {
-        Task<TEntity> FindAsync(TKey key);
+        //Task<TEntity> FindAsync(TKey key);
 
         Task<IEnumerable<TEntity>> GetAsync();
 

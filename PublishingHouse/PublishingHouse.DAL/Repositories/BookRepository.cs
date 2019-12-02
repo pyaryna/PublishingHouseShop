@@ -13,6 +13,19 @@ namespace PublishingHouse.DAL.Repositories
     {
         public BookRepository(PublishingHouseContext context) : base(context) { }
 
+        public async Task<Book> FindAsync(int id)
+        {
+            return await Context.Books
+                .Include(b => b.BookAuthors)
+                .ThenInclude(ba => ba.Author)
+                .Include(b => b.BookCategories)
+                .ThenInclude(bc => bc.Category)
+                .Include(b => b.BookOrders)
+                .ThenInclude(bo => bo.Order)
+                .Include(b => b.Comments)
+                .FirstOrDefaultAsync(d => d.Id == id);
+        }
+
         public async Task<IEnumerable<Book>> GetAllBooksAsync(int? skip, int? take)
         {
             var dishes = GetBooksMainInfo();

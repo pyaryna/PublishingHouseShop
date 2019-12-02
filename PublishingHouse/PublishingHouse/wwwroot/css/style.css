@@ -210,12 +210,12 @@ footer{
     }
 }
 
-.modal-body img{
+.book-details img {
     float: left;
 }
 
 @media all and (max-width: 500px){
-    .modal-body img{
+    .book-details img {
         float: none;
     }
 }
@@ -226,9 +226,10 @@ footer{
     }
 }
 
-.modal-title{
+.book-details h4{
     font-family: MontserratAlternates;
     font-size: 1.6rem;
+    text-align: center;
 }
 
 .literature{
