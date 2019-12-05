@@ -4,7 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
+using PublishingHouse.BLL.DTOs;
 using PublishingHouse.BLL.Interfaces;
 using PublishingHouse.Models;
 
@@ -13,6 +15,8 @@ namespace PublishingHouse.Controllers
     public class HomeController : Controller
     {
         private IBookService _bookService;
+        private IAuthorService _authorService;
+        private ICategoryService _categoryService;
         //private readonly ILogger<HomeController> _logger;
 
         //public HomeController(ILogger<HomeController> logger)
@@ -20,9 +24,11 @@ namespace PublishingHouse.Controllers
         //    _logger = logger;
         //}
 
-        public HomeController(IBookService bookService)
+        public HomeController(IBookService bookService, IAuthorService authorService, ICategoryService categoryService)
         {
             _bookService = bookService;
+            _authorService = authorService;
+            _categoryService = categoryService;
         }
 
         [HttpGet]
@@ -32,12 +38,45 @@ namespace PublishingHouse.Controllers
             return View(books);
         }
 
-        
-        public async Task<IActionResult> Details(int id)
+        [HttpGet]
+        public IActionResult Contacts()
         {
-            var book = await _bookService.GetOneBookInfoAsync(id);
-            return View(book);
+            return View();
         }
+
+        [HttpGet]
+        public IActionResult Design()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Druk()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Main()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Publishing()
+        {
+            return View();
+        }
+
+
+
+
+
+
+
+
+
+
         public IActionResult Privacy()
         {
             return View();

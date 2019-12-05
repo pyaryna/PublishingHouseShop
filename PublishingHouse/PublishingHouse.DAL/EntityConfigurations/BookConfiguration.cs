@@ -13,6 +13,9 @@ namespace PublishingHouse.DAL.EntityConfigurations
         {
             builder.HasKey(b => b.Id);
 
+            builder.Property(b => b.Id)
+                .ValueGeneratedOnAdd();
+
             builder.Property(b => b.Title)
                 .IsRequired();
 

@@ -12,6 +12,8 @@ namespace PublishingHouse.DAL
         protected override void Load(ContainerBuilder builder)
         {                  
             builder.RegisterType<BookRepository>().As<IBookRepository>();
+            builder.RegisterType<AuthorRepository>().As<IAuthorRepository>();
+            builder.RegisterType<CategoryRepository>().As<ICategoryRepository>();
             builder.RegisterType<PublishingHouseUnitOfWork>().As<IPublishingHouseUnitOfWork>();
         }
     }

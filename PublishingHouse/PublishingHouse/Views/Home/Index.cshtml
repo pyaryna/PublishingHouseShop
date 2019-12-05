@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PublishingHouse.BLL.DTOs.BookPreviewDto>
+﻿@model IEnumerable<BookPreviewDto>
 
 <div class="container">
     <div class="row padding">
@@ -7,19 +7,28 @@
             <div class="col-md-3 padding">
                 <div class="card">
                     <div class="card-header">
-                        <a asp-controller="Home" asp-action="Details" asp-route-id="@book.Id">
+                        <a asp-controller="Book" asp-action="Details" asp-route-id="@book.Id">
                             <img src=@book.ImageUrl class="card-img-top" asp-append-version="true" alt="book image"/>
                         </a>                        
                     </div>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a asp-controller="Home" asp-action="Details" asp-route-id="@book.Id">@book.Title</a>
+                            <a asp-controller="Book" asp-action="Details" asp-route-id="@book.Id">@book.Title</a>
                         </h4>
                         <p class="card-text">@book.Price грн</p>
                         <!--<button class="btn detal" data-toggle="modal" data-target="#gavel">
                             У КОШИК
-                        </button>-->
+                        </button>-->                    
+
+                    </div>
+                    <div class="card-footer">
                         <a href=#><i class="fas fa-shopping-cart"></i></a>
+                        <a class="btn btn-warning" asp-controller="Book" asp-action="Update" asp-route-id="@book.Id">
+                            Редагувати
+                        </a>
+                        <a class="btn btn-danger" asp-controller="Book" asp-action="Delete" asp-route-id="@book.Id" method="delete">
+                            Видалити
+                        </a>
                     </div>
                 </div>                
             </div>

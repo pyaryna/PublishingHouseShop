@@ -14,6 +14,8 @@ namespace PublishingHouse.BLL
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<BookService>().As<IBookService>();
+            builder.RegisterType<AuthorService>().As<IAuthorService>();
+            builder.RegisterType<CategoryService>().As<ICategoryService>();
 
             builder.RegisterModule<DALDependencyModule>();
         }

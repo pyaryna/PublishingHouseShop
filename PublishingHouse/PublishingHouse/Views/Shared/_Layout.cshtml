@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject SignInManager<IdentityUser> _signInManager;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -21,7 +23,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
 
 </head>
-<body>  
+<body>
     <header>
         <div class="container">
             <div class="row">
@@ -43,11 +45,19 @@
                     </p>
                 </div>
                 <div class="col-lg-3 address-div">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <p>
-                        Львів<br>
-                        вул Гребінки, буд. 5, оф. 1
-                    </p>
+                        @if (_signInManager.IsSignedIn(User))
+                        {
+                            <form method="post" asp-action="logout" asp-controller="account">
+                                <button type="submit" class="nav-link btn btn-link py-0">
+                                    Вийти @User.Identity.Name
+                                </button>
+                            </form>
+                        }
+                        else
+                        {
+                <a asp-action="register" asp-controller="account">Зареєструватися</a><br>
+                <a asp-action="login" asp-controller="account">Увійти</a>
+                        }            
                 </div>
             </div>
         </div>
@@ -62,29 +72,31 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a href="main.html" class="nav-link">Про нас</a>
+                            <a asp-controller="Home" asp-action="Main" class="nav-link">Про нас</a>
                         </li>
                         <li class="nav-item active">
-                            <a href="index.html" class="nav-link">Наші видання</a>
+                            <a asp-controller="Home" asp-action="Index" class="nav-link">Наші видання</a>
                         </li>
                         <li class="nav-item">
-                            <a href="publishing.html" class="nav-link">Видавництво</a>
+                            <a asp-controller="Home" asp-action="Publishing" class="nav-link">Видавництво</a>
                         </li>
                         <li class="nav-item">
-                            <a href="design.html" class="nav-link">Дизайн-студія</a>
+                            <a asp-controller="Home" asp-action="Design" class="nav-link">Дизайн-студія</a>
                         </li>
                         <li class="nav-item">
-                            <a href="druk.html" class="nav-link">Цифровий друк</a>
+                            <a asp-controller="Home" asp-action="Druk" class="nav-link">Цифровий друк</a>
                         </li>
                         <li class="nav-item">
-                            <a href="contacts.html" class="nav-link">Контакти</a>
+                            <a asp-controller="Home" asp-action="Contacts" class="nav-link">Контакти</a>
                         </li>
+                    </ul>
+                    <ul>
                     </ul>
                 </div>
             </nav>
         </div>
     </div>
-    <div class="container">
+    <div class="container padding">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -99,6 +111,9 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+    @if (IsSectionDefined("Scripts"))
+    {
+        @RenderSection("Scripts", required: true)
+    }
 </body>
 </html>

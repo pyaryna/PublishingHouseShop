@@ -1,0 +1,35 @@
+﻿@model BookDto
+
+    <div class="container book-details">
+        <h4 class="modal-title">@Model.Title</h4>
+        <img src=@Model.ImageUrl class="padding" alt="book image" asp-append-version="true" />
+        <p>
+            Автор:
+            @foreach (var author in @Model.Authors)
+            {
+                @author.Name<br>
+            }
+            Мова видання: @Model.Language<br>
+            Рік видання: @Model.Year<br>
+            Формат: @Model.Format<br>
+            Палітурка: @Model.Cover<br>
+            Обсяг: @Model.PagesAmount с.
+        </p>
+        <p>
+            @Model.Description
+        </p>
+        <p>
+            Ціна: @Model.Price грн
+        </p>
+        <div>
+            <button class="btn btn-danger">
+                КУПИТИ
+            </button>
+            <a class="btn btn-warning" asp-controller="Book" asp-action="Update" asp-route-id="@Model.Id">
+                Редагувати
+            </a>
+            <a class="btn btn-danger" asp-controller="Book" asp-action="Delete" asp-route-id="@Model.Id">
+                Видалити
+            </a>
+        </div>
+    </div>
