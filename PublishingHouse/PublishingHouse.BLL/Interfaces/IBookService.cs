@@ -10,6 +10,7 @@ namespace PublishingHouse.BLL.Interfaces
     {
         Task<IEnumerable<BookPreviewDto>> GetAllBooksInfoAsync();
         Task<BookDto> GetOneBookInfoAsync(int id);
+        Task<BookPreviewDto> GetOneBookPreviewAsync(int id);
         Task<UpdateBookDto> GetBookForUpdateAsync(int id);
         Task<BookDto> AddBookAsync(AddBookDto addBook);
         Task<BookDto> UpdateBookAsync(int id, UpdateBookDto updateBook);

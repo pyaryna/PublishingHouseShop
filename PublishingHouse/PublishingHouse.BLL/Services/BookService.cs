@@ -41,6 +41,11 @@ namespace PublishingHouse.BLL.Services
             return _mapper.Map<Book, BookDto>(await _unitOfWork.Books.FindAsync(id));
         }
 
+        public async Task<BookPreviewDto> GetOneBookPreviewAsync(int id)
+        {
+            return _mapper.Map<Book, BookPreviewDto>(await _unitOfWork.Books.FindAsync(id));
+        }
+
         public async Task<UpdateBookDto> GetBookForUpdateAsync(int id)
         {
             return _mapper.Map<Book, UpdateBookDto>(await _unitOfWork.Books.FindAsync(id));
