@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PublishingHouse.BLL.DTOs;
 using PublishingHouse.BLL.Interfaces;
 
 namespace PublishingHouse.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         private ICategoryService _categoryService;

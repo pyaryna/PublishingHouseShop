@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PublishingHouse.BLL.DTOs;
 
 namespace PublishingHouse.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private UserManager<IdentityUser> _userManager;
@@ -22,12 +24,14 @@ namespace PublishingHouse.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterDto model)
         {
             if (ModelState.IsValid)
@@ -54,6 +58,7 @@ namespace PublishingHouse.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl)
         {
             LoginDto model = new LoginDto
@@ -65,7 +70,8 @@ namespace PublishingHouse.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginDto model)
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(LoginDto model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -73,12 +79,22 @@ namespace PublishingHouse.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("index", "home");
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("index", "home");
+                    }                    
                 }
 
                 ModelState.AddModelError(string.Empty, "Помилка авторизації");
             }
-            return View();
+
+            model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            return View(model);
         }
 
         [HttpPost]
@@ -88,8 +104,8 @@ namespace PublishingHouse.Controllers
             return RedirectToAction("index", "home");
         }
 
-        //[AllowAnonymous]
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult ExternalLogin(string provider, string returnUrl)
         {
             var redirectUrl = Url.Action("ExternalLoginCallback", "Account",
@@ -99,7 +115,7 @@ namespace PublishingHouse.Controllers
             return new ChallengeResult(provider, properties);
         }
 
-        //[AllowAnonymous]
+        [AllowAnonymous]
         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");

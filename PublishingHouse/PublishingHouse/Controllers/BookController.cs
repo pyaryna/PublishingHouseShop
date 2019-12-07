@@ -7,9 +7,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PublishingHouse.Controllers
 {
+    [Authorize]
     public class BookController : Controller
     {
         private IBookService _bookService;
@@ -24,6 +26,7 @@ namespace PublishingHouse.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var book = await _bookService.GetOneBookInfoAsync(id);

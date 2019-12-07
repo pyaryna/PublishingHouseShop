@@ -42,9 +42,6 @@ namespace PublishingHouse
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<PublishingHouseContext>();
 
-            services.AddAuthentication(OAuthValidationDefaults.AuthenticationScheme)
-                .AddOAuthValidation();
-
             services.AddAuthentication()
                 .AddGoogle(options =>
                 {
