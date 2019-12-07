@@ -372,3 +372,14 @@ footer {
 #email-contacts {
     float: none;
 }
+
+
+
+
+
+/*login*/
+
+.external-login img{
+    height: 3rem;
+    width: auto;
+}

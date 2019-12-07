@@ -42,9 +42,19 @@ namespace PublishingHouse
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<PublishingHouseContext>();
 
+            services.AddAuthentication(OAuthValidationDefaults.AuthenticationScheme)
+                .AddOAuthValidation();
+
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    options.ClientId = "558382192487-pj1va0glu5o6tdjuovdn1knkj754ikdn.apps.googleusercontent.com";
+                    options.ClientSecret = "_mtrXTztLD_x0Cvf6KpA32rK";
+                });
+
             services.AddControllersWithViews();
 
-            services.AddAutoMapper(typeof(BookProfile).Assembly);
+            services.AddAutoMapper(typeof(BookProfile).Assembly);          
 
             var builder = new ContainerBuilder();
             builder.Populate(services);
