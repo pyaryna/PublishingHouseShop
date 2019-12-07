@@ -18,6 +18,7 @@ using PublishingHouse.BLL.Interfaces;
 using PublishingHouse.BLL.MappingProfilers;
 using PublishingHouse.BLL.Services;
 using PublishingHouse.DAL;
+using PublishingHouse.DAL.Entities;
 
 namespace PublishingHouse
 {
@@ -39,7 +40,7 @@ namespace PublishingHouse
             services.AddDbContext<PublishingHouseContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("PublishingHouseDb")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<Customer, IdentityRole>()
                 .AddEntityFrameworkStores<PublishingHouseContext>();
 
             services.AddAuthentication()

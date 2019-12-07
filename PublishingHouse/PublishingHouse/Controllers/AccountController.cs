@@ -7,17 +7,18 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PublishingHouse.BLL.DTOs;
+using PublishingHouse.DAL.Entities;
 
 namespace PublishingHouse.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
-        private UserManager<IdentityUser> _userManager;
-        private SignInManager<IdentityUser> _signInManager;
+        private UserManager<Customer> _userManager;
+        private SignInManager<Customer> _signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager,
-                                 SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<Customer> userManager,
+                                 SignInManager<Customer> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -36,7 +37,7 @@ namespace PublishingHouse.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser
+                var user = new Customer
                 {
                     UserName = model.Email,
                     Email = model.Email
@@ -154,7 +155,7 @@ namespace PublishingHouse.Controllers
 
                     if(user == null)
                     {
-                        user = new IdentityUser
+                        user = new Customer
                         {
                             UserName = info.Principal.FindFirstValue(ClaimTypes.Email),
                             Email = info.Principal.FindFirstValue(ClaimTypes.Email)

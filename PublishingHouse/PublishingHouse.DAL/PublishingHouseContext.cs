@@ -8,7 +8,7 @@ using System.Text;
 
 namespace PublishingHouse.DAL
 {
-    public class PublishingHouseContext: IdentityDbContext
+    public class PublishingHouseContext: IdentityDbContext<Customer>
     {   
         public PublishingHouseContext(DbContextOptions<PublishingHouseContext> options): base(options){}
 
