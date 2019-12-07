@@ -94,7 +94,24 @@
                             <a asp-controller="Home" asp-action="Contacts" class="nav-link">Контакти</a>
                         </li>
                     </ul>
-                    <ul>
+                    <ul class="navbar-nav ml-auto">
+                        @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Створити
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" asp-controller="Book"
+                                       asp-action="Create">Книга</a>
+                                    <a class="dropdown-item" asp-controller="Author"
+                                       asp-action="Create">Автор</a>
+                                    <a class="dropdown-item" asp-controller="Category"
+                                       asp-action="Create">Категорія</a>
+                                </div>
+                            </li>
+                        }
                     </ul>
                 </div>
             </nav>

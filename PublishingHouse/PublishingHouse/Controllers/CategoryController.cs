@@ -9,7 +9,7 @@ using PublishingHouse.BLL.Interfaces;
 
 namespace PublishingHouse.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
         private ICategoryService _categoryService;

@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace PublishingHouse.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class BookController : Controller
     {
         private IBookService _bookService;
@@ -74,7 +74,7 @@ namespace PublishingHouse.Controllers
             return View(book);
         }
 
-        [HttpDelete]
+        [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
             await _bookService.RemoveBookByIdAsync(id);

@@ -1,35 +1,53 @@
 ﻿@model BookDto
+@inject SignInManager<Customer> _signInManager;
 
-    <div class="container book-details">
-        <h4 class="modal-title">@Model.Title</h4>
-        <img src=@Model.ImageUrl class="padding" alt="book image" asp-append-version="true" />
-        <p>
-            Автор:
-            @foreach (var author in @Model.Authors)
-            {
-                @author.Name<br>
-            }
-            Мова видання: @Model.Language<br>
-            Рік видання: @Model.Year<br>
-            Формат: @Model.Format<br>
-            Палітурка: @Model.Cover<br>
-            Обсяг: @Model.PagesAmount с.
-        </p>
-        <p>
-            @Model.Description
-        </p>
-        <p>
-            Ціна: @Model.Price грн
-        </p>
-        <div>
-            <button class="btn btn-danger">
-                КУПИТИ
-            </button>
-            <a class="btn btn-warning" asp-controller="Book" asp-action="Update" asp-route-id="@Model.Id">
-                Редагувати
-            </a>
-            <a class="btn btn-danger" asp-controller="Book" asp-action="Delete" asp-route-id="@Model.Id">
-                Видалити
-            </a>
-        </div>
+<div class="container book-details">
+    <h4 class="modal-title">@Model.Title</h4>
+    <img src=@Model.ImageUrl class="padding" alt="book image" asp-append-version="true" />
+    <p>
+        Автор:
+        @foreach (var author in @Model.Authors)
+        {
+            @author.Name<br>
+        }
+        Мова видання: @Model.Language<br>
+        Рік видання: @Model.Year<br>
+        Формат: @Model.Format<br>
+        Палітурка: @Model.Cover<br>
+        Обсяг: @Model.PagesAmount с.
+    </p>
+    <p>
+        @Model.Description
+    </p>
+    <p>
+        Ціна: @Model.Price грн
+    </p>
+    <div>
+        <a class="btn btn-danger" asp-controller="Order" asp-action="Buy" asp-route-id="@Model.Id">
+            КУПИТИ
+        </a>
+
+        @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+        {
+            <form asp-controller="Book" asp-action="Delete" asp-route-id="@Model.Id" method="post">
+
+                <a class="btn btn-warning" asp-controller="Book" asp-action="Update" asp-route-id="@Model.Id">
+                    Редагувати
+                </a>
+
+                <span id="confirmDeleteSpan_@Model.Id" style="display:none">
+                    <span>Ви впевнені, що хочете видалити?</span>
+                    <button type="submit" class="btn btn-danger">Так</button>
+                    <a href="#" class="btn btn-primary"
+                       onclick="confirmDelete('@Model.Id', false)">Ні</a>
+                </span>
+
+                <span id="deleteSpan_@Model.Id">
+                    <a href="#" class="btn btn-danger"
+                       onclick="confirmDelete('@Model.Id', true)">Видалити</a>
+                </span>
+            </form>
+        }
+
     </div>
+</div>
