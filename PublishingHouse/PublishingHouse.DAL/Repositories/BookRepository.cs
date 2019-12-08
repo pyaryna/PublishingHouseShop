@@ -23,6 +23,7 @@ namespace PublishingHouse.DAL.Repositories
                 .Include(b => b.BookOrders)
                 .ThenInclude(bo => bo.Order)
                 .Include(b => b.Comments)
+                .ThenInclude(c => c.Customer)
                 .FirstOrDefaultAsync(d => d.Id == id);
         }
 

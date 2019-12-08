@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PublishingHouse.DAL;
 
 namespace PublishingHouse.DAL.Migrations
 {
     [DbContext(typeof(PublishingHouseContext))]
-    partial class PublishingHouseContextModelSnapshot : ModelSnapshot
+    [Migration("20191208145253_ChangeCustomerIdType")]
+    partial class ChangeCustomerIdType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1233,7 +1235,7 @@ namespace PublishingHouse.DAL.Migrations
                         .IsRequired();
 
                     b.HasOne("PublishingHouse.DAL.Entities.Customer", "Customer")
-                        .WithMany("Comments")
+                        .WithMany()
                         .HasForeignKey("CustomerId");
                 });
 

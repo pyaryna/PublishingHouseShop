@@ -18,7 +18,7 @@
 
     <script scr="https://ajax.googleapis.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 
-    <script scr ="https://ajax.googleapis.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+    <script scr="https://ajax.googleapis.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
@@ -49,19 +49,19 @@
                     </p>
                 </div>
                 <div class="col-lg-3 address-div">
-                        @if (_signInManager.IsSignedIn(User))
-                        {
-                            <form method="post" asp-action="logout" asp-controller="account">
-                                <button type="submit" class="nav-link btn btn-link py-0">
-                                    Вийти @User.Identity.Name
-                                </button>
-                            </form>
-                        }
-                        else
-                        {
-                            <a asp-action="register" asp-controller="account">Зареєструватися</a><br>
-                            <a asp-action="login" asp-controller="account">Увійти</a>
-                        }            
+                    @if (_signInManager.IsSignedIn(User))
+                    {
+                        <form method="post" asp-action="logout" asp-controller="account">
+                            <button type="submit" class="nav-link btn btn-link py-0">
+                                Вийти @User.Identity.Name
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <a asp-action="register" asp-controller="account">Зареєструватися</a><br>
+                        <a asp-action="login" asp-controller="account">Увійти</a>
+                    }
                 </div>
             </div>
         </div>
@@ -78,7 +78,7 @@
                         <li class="nav-item">
                             <a asp-controller="Home" asp-action="Main" class="nav-link">Про нас</a>
                         </li>
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a asp-controller="Home" asp-action="Index" class="nav-link">Наші видання</a>
                         </li>
                         <li class="nav-item">
@@ -94,9 +94,10 @@
                             <a asp-controller="Home" asp-action="Contacts" class="nav-link">Контакти</a>
                         </li>
                     </ul>
-                    <ul class="navbar-nav ml-auto">
-                        @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                        {
+                    @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        <ul class="navbar-nav ml-auto">
+
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -111,8 +112,9 @@
                                        asp-action="Create">Категорія</a>
                                 </div>
                             </li>
-                        }
-                    </ul>
+
+                        </ul>
+                    }
                 </div>
             </nav>
         </div>

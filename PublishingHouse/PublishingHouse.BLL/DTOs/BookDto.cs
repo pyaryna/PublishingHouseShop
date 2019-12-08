@@ -18,6 +18,8 @@ namespace PublishingHouse.BLL.DTOs
         public string Description { get; set; }
         public int Price { get; set; }
 
+        public AddCommentDto AddComment { get; set; }
+
         public ICollection<CommentDto> Comments { get; set; }
 
         public ICollection<AuthorDto> Authors { get; set; }

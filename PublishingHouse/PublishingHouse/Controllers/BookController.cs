@@ -78,7 +78,7 @@ namespace PublishingHouse.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _bookService.RemoveBookByIdAsync(id);
-            return View("/Home/Index");
+            return View("~/Home/Index");
         }
     }
 }

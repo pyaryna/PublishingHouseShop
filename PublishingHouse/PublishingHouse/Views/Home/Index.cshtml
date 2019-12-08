@@ -29,18 +29,16 @@
                         {
                             <form asp-controller="Book" asp-action="Delete" asp-route-id="@book.Id" method="post">
 
-                                <a class="btn btn-warning" asp-controller="Book" asp-action="Update" asp-route-id="@book.Id">
+                                <a class="btn btn-warning m-1" asp-controller="Book" asp-action="Update" asp-route-id="@book.Id">
                                     Редагувати
                                 </a>
-                                <button type="submit" class="btn btn-danger"
+                                <button type="submit" class="btn btn-danger m-1"
                                         onclick="return confirm('Ви впевнені, що хочете видалити книгу: @book.Title?')">
                                     Видалити
                                 </button>
 
                             </form>
                         }
-
-
                     </div>
                 </div>
             </div>

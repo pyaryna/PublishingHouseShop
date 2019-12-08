@@ -39,7 +39,8 @@ namespace PublishingHouse.Controllers
             {
                 var user = new Customer
                 {
-                    UserName = model.Email,
+                    UserName = model.UserName,
+                    //UserName = model.Email,
                     Email = model.Email
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);

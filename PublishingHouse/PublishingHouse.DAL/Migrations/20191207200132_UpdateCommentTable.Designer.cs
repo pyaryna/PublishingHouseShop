@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PublishingHouse.DAL;
 
 namespace PublishingHouse.DAL.Migrations
 {
     [DbContext(typeof(PublishingHouseContext))]
-    partial class PublishingHouseContextModelSnapshot : ModelSnapshot
+    [Migration("20191207200132_UpdateCommentTable")]
+    partial class UpdateCommentTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1020,7 +1022,10 @@ namespace PublishingHouse.DAL.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CustomerId")
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CustomerId1")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DateTime")
@@ -1034,7 +1039,7 @@ namespace PublishingHouse.DAL.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerId1");
 
                     b.ToTable("Comments");
                 });
@@ -1111,7 +1116,10 @@ namespace PublishingHouse.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CustomerId")
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CustomerId1")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DateTime")
@@ -1123,7 +1131,7 @@ namespace PublishingHouse.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerId1");
 
                     b.ToTable("Orders");
                 });
@@ -1233,15 +1241,15 @@ namespace PublishingHouse.DAL.Migrations
                         .IsRequired();
 
                     b.HasOne("PublishingHouse.DAL.Entities.Customer", "Customer")
-                        .WithMany("Comments")
-                        .HasForeignKey("CustomerId");
+                        .WithMany()
+                        .HasForeignKey("CustomerId1");
                 });
 
             modelBuilder.Entity("PublishingHouse.DAL.Entities.Order", b =>
                 {
-                    b.HasOne("PublishingHouse.DAL.Entities.Customer", "Customer")
+                    b.HasOne("PublishingHouse.DAL.Entities.Customer", null)
                         .WithMany("Orders")
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomerId1");
                 });
 #pragma warning restore 612, 618
         }
