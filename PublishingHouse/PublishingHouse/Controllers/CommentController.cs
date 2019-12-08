@@ -35,7 +35,7 @@ namespace PublishingHouse.Controllers
                 addComment.BookId = bookId;
                 addComment.CustomerId = (await _userManager.GetUserAsync(HttpContext.User)).Id;
                 await _commentService.AddCommentAsync(addComment);
-                return RedirectToAction("Details");
+                return RedirectToAction("details", "book", new { id = bookId });
             }
 
             return View();
@@ -63,10 +63,10 @@ namespace PublishingHouse.Controllers
         //}
 
         [HttpPost]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, int bookId)
         {
             await _commentService.RemoveCommentByIdAsync(id);
-            return RedirectToAction("Details");
+            return RedirectToAction("details", "book", new { id = bookId });
         }
     }
 }

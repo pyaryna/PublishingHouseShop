@@ -82,7 +82,9 @@
                 @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                 {
                     <div class="card-footer">
-                        <form asp-controller="Comment" asp-action="Delete" asp-route-id="@comment.Id" method="post">
+                        <form asp-controller="Comment" asp-action="Delete" 
+                              asp-route-id="@comment.Id" asp-route-bookId="@Model.Id" 
+                              method="post">
                             <span id="confirmDeleteSpan_@comment.Id" style="display:none">
                                 <span>Ви впевнені, що хочете видалити?</span>
                                 <button type="submit" class="btn btn-danger m-1">Так</button>

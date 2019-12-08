@@ -378,6 +378,13 @@ footer {
     float: none;
 }
 
+#send {
+    margin: -20px -50px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+}
+
 
 
 

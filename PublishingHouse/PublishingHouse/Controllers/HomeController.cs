@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
+using MimeKit;
 using PublishingHouse.BLL.DTOs;
 using PublishingHouse.BLL.Interfaces;
 using PublishingHouse.Models;
@@ -41,6 +43,25 @@ namespace PublishingHouse.Controllers
         [HttpGet]
         public IActionResult Contacts()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Contacts(CallbackDto callbackDto)
+        {
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress(callbackDto.Email));
+            message.To.Add(new MailboxAddress("p.yaryna@gmail.com"));
+            message.Subject = callbackDto.Issue;
+            message.Body = new TextPart
+            {
+                Text = callbackDto.Message
+            };
+            using(var client = new SmtpClient())
+            {
+                client.Send(message);
+            }
+                
             return View();
         }
 

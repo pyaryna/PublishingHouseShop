@@ -1,4 +1,6 @@
-﻿<div class="row">
+﻿@model CallbackDto
+
+<div class="row">
     <div class="col-xs-12 col-sm-7 col-md-8 col-lg-8">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2573.0486796314945!2d24.018918315879638!3d49.84154283893157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473add715ede12bd%3A0x451524381453680d!2z0KbQuNGE0YDQvtCy0LjQuSDQtNGA0YPQuiDQn9CQ0IbQoQ!5e0!3m2!1suk!2sua!4v1570993450247!5m2!1suk!2sua"
                 class="map">
@@ -26,4 +28,26 @@
             (032) 261-24-15
         </p>
     </div>
+</div>
+
+<hr />
+<div>
+    <h2 class="centered">Напишіть нам</h2>
+    <form>
+        <div class="form-row">
+            <div class="col form-group">
+                <input asp-for="Name" class="form-control m-2" placeholder="Ваше ім'я" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+                <input asp-for="Email" class="form-control m-2" placeholder="Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+                <input asp-for="Issue" class="form-control m-2" placeholder="Тема" />
+                <span asp-validation-for="Issue" class="text-danger"></span>
+            </div>
+            <div class="col form-group">
+                <textarea asp-for="Message" class="form-control m-2" placeholder="Повідомлення"></textarea>
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-danger" id="send">Надіслати</button>
+    </form>
 </div>
