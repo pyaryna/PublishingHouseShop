@@ -13,8 +13,12 @@ namespace PublishingHouse.DAL.Extensions
         {
             modelBuilder.ApplyConfiguration(new AuthorConfiguration());
             modelBuilder.ApplyConfiguration(new BookAuthorConfiguration());
+            modelBuilder.ApplyConfiguration(new BookCategoryConfiguration());
             modelBuilder.ApplyConfiguration(new BookConfiguration());
             modelBuilder.ApplyConfiguration(new BookOrderConfiguration());
+            modelBuilder.ApplyConfiguration(new CartBookConfiguration());
+            modelBuilder.ApplyConfiguration(new CartConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new CommentConfiguration());
             modelBuilder.ApplyConfiguration(new OrderConfiguration());
         }

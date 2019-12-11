@@ -13,6 +13,8 @@ namespace PublishingHouse.DAL
         IBookCategoryRepository BookCategories { get; }
         IBookOrderRepository BookOrders { get; }
         IBookRepository Books { get; }
+        ICartBookRepository CartBooks { get; }
+        ICartRepository Carts { get; }        
         ICategoryRepository Categories { get; }
         ICommentRepository Comments { get; }
         IOrderRepository Orders { get; }

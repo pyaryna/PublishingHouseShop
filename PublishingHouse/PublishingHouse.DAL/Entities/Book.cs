@@ -31,5 +31,6 @@ namespace PublishingHouse.DAL.Entities
         public ICollection<BookAuthor> BookAuthors { get; set; }
         public ICollection<BookCategory> BookCategories { get; set; }
         public ICollection<BookOrder> BookOrders { get; set; }
+        public ICollection<CartBook> BookCarts { get; set; }
     }
 }

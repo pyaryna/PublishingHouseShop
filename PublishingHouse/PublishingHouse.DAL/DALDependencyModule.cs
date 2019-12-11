@@ -15,6 +15,8 @@ namespace PublishingHouse.DAL
             builder.RegisterType<AuthorRepository>().As<IAuthorRepository>();
             builder.RegisterType<CategoryRepository>().As<ICategoryRepository>();
             builder.RegisterType<CommentRepository>().As<ICommentRepository>();
+            builder.RegisterType<CartRepository>().As<ICartRepository>();
+            builder.RegisterType<OrderRepository>().As<IOrderRepository>();
             builder.RegisterType<PublishingHouseUnitOfWork>().As<IPublishingHouseUnitOfWork>();
         }
     }
