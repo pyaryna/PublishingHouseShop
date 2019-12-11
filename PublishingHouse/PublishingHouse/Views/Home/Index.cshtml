@@ -17,14 +17,17 @@
                             <a asp-controller="Book" asp-action="Details" asp-route-id="@book.Id">@book.Title</a>
                         </h4>
                         <p class="card-text">@book.Price грн</p>
-                        <!--<button class="btn detal" data-toggle="modal" data-target="#gavel">
-                            У КОШИК
-                        </button>-->
-
                     </div>
                     <div class="card-footer">
+                        @if (_signInManager.IsSignedIn(User) && !User.IsInRole("Admin"))
+                        {
+                            <form asp-controller="Cart" asp-action="Add" asp-route-bookId="@book.Id" method="post">
+                                <button type="submit" class="btn btn-danger m-1">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </form>                            
+                        }
 
-                        <a href=#><i class="fas fa-shopping-cart"></i></a>
                         @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
                             <form asp-controller="Book" asp-action="Delete" asp-route-id="@book.Id" method="post">

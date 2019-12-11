@@ -13,10 +13,9 @@ namespace PublishingHouse.DAL.EntityConfigurations
         {
             builder.HasKey(o => o.Id);
 
-            builder.HasMany(b => b.CartBooks)
-                .WithOne(bo => bo.Cart)
-                .IsRequired()
-                .HasForeignKey(bo => bo.CartId);
+            builder.HasOne(c => c.Book)
+                .WithMany(c => c.Carts)
+                .HasForeignKey(c => c.BookId);
         }
     }
 }

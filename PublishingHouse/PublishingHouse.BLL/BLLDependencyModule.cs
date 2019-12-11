@@ -15,8 +15,10 @@ namespace PublishingHouse.BLL
         {
             builder.RegisterType<BookService>().As<IBookService>();
             builder.RegisterType<AuthorService>().As<IAuthorService>();
+            builder.RegisterType<CartService>().As<ICartService>();
             builder.RegisterType<CategoryService>().As<ICategoryService>();
             builder.RegisterType<CommentService>().As<ICommentService>();
+            builder.RegisterType<OrderService>().As<IOrderService>();
 
             builder.RegisterModule<DALDependencyModule>();
         }

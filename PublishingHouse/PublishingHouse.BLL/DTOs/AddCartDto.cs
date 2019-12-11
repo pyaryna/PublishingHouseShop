@@ -4,8 +4,9 @@ using System.Text;
 
 namespace PublishingHouse.BLL.DTOs
 {
-    public class CartDto
+    public class AddCartDto
     {
-        public BookPreviewDto Book { get; set; }
+        public int BookId { get; set; }
+        public string CustomerId { get; set; }
     }
 }

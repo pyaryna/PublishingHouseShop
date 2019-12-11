@@ -6,15 +6,10 @@ namespace PublishingHouse.DAL.Entities
 {
     public class Cart
     {
-        public Cart()
-        {
-            CartBooks = new HashSet<CartBook>();
-        }
-
         public int Id { get; set; }
-        public int CustomerId { get; set; }
+        public string CustomerId { get; set; }
         public Customer Customer { get; set; }
-
-        public ICollection<CartBook> CartBooks { get; set; }
+        public int BookId { get; set; }
+        public Book Book { get; set; }
     }
 }

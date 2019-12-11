@@ -89,6 +89,14 @@
                             <a asp-controller="Home" asp-action="Contacts" class="nav-link">Контакти</a>
                         </li>
                     </ul>
+                    @if (_signInManager.IsSignedIn(User) && !User.IsInRole("Admin"))
+                    {
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a asp-controller="Cart" asp-action="Books" class="nav-link">Кошик</a>
+                            </li>
+                        </ul>
+                    }
                     @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                     {
                         <ul class="navbar-nav ml-auto">

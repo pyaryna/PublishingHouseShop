@@ -1,0 +1,45 @@
+﻿@model IEnumerable<CartDto>
+
+<h2>Кошик</h2>
+
+@if (Model != null)
+{
+    <form>
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Додані</th>
+                    <th scope="col">Ціна</th>
+                    <th scope="col">Кількість</th>
+                    <th scope="col">Сума</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in Model)
+                {
+                    <tr>
+                        <th scope="row">
+                            @book.Book.ImageUrl
+                            @book.Book.Title
+                        </th>
+                        <td>@book.Book.Price</td>
+                        <td>
+                            
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </form>
+}
+else
+{
+    <p>
+        Ваш Кошик поки порожній.
+    </p>
+    <a class="btn btn-danger" asp-controller="home" asp-action="index">
+        Почати покупки
+    </a>
+}

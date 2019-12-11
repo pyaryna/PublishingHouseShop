@@ -23,9 +23,15 @@
         Ціна: @Model.Price грн
     </p>
     <div>
-        <a class="btn btn-danger m-1" asp-controller="Order" asp-action="Buy" asp-route-id="@Model.Id">
-            КУПИТИ
-        </a>
+
+        @if (_signInManager.IsSignedIn(User) && !User.IsInRole("Admin"))
+        {
+            <form asp-controller="Cart" asp-action="Add" asp-route-bookId="@Model.Id" method="post">
+                <button type="submit" class="btn btn-danger m-1">
+                    КУПИТИ  
+                </button>
+            </form>
+        }
 
         @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
         {

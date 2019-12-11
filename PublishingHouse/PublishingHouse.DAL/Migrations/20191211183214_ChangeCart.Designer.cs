@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PublishingHouse.DAL;
 
 namespace PublishingHouse.DAL.Migrations
 {
     [DbContext(typeof(PublishingHouseContext))]
-    partial class PublishingHouseContextModelSnapshot : ModelSnapshot
+    [Migration("20191211183214_ChangeCart")]
+    partial class ChangeCart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -993,14 +995,17 @@ namespace PublishingHouse.DAL.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CustomerId")
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CustomerId1")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BookId");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerId1");
 
                     b.ToTable("Carts");
                 });
@@ -1256,8 +1261,8 @@ namespace PublishingHouse.DAL.Migrations
                         .IsRequired();
 
                     b.HasOne("PublishingHouse.DAL.Entities.Customer", "Customer")
-                        .WithMany("Carts")
-                        .HasForeignKey("CustomerId");
+                        .WithMany()
+                        .HasForeignKey("CustomerId1");
                 });
 
             modelBuilder.Entity("PublishingHouse.DAL.Entities.Comment", b =>

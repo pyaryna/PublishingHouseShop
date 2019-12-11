@@ -16,19 +16,16 @@ namespace PublishingHouse.Controllers
     {
         private ICommentService _commentService;
         private UserManager<Customer> _userManager;
-        private SignInManager<Customer> _signInManager;
 
         public CommentController(ICommentService commentService,
-                                 UserManager<Customer> userManager,
-                                 SignInManager<Customer> signInManager)
+                                 UserManager<Customer> userManager)
         {
             _commentService = commentService;
             _userManager = userManager;
-            _signInManager = signInManager;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(int bookId, int customerId, AddCommentDto addComment)
+        public async Task<IActionResult> Add(int bookId, AddCommentDto addComment)
         {
             if (ModelState.IsValid)
             {

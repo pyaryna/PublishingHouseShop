@@ -29,14 +29,14 @@ namespace PublishingHouse.DAL.Repositories
 
         public async Task<IEnumerable<Book>> GetAllBooksAsync(int? skip, int? take)
         {
-            var dishes = GetBooksMainInfo();
+            var books = GetBooksMainInfo();
 
             //if (skip.HasValue && take.HasValue)
             //{
             //    dishes = dishes.Paginate(skip.Value, take.Value);
             //}
 
-            return await dishes.ToListAsync();
+            return await books.ToListAsync();
         }
 
         private IQueryable<Book> GetBooksMainInfo()
