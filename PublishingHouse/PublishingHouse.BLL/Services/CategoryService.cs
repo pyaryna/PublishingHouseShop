@@ -38,5 +38,13 @@ namespace PublishingHouse.BLL.Services
 
             return _mapper.Map<Category, CategoryDto>(categoryEntity);
         }
+        public async Task RemoveCategoryByIdAsync(int id)
+        {
+            var category = await _unitOfWork.Categories.FindAsync(id);
+
+            _unitOfWork.Categories.Remove(category);
+
+            await _unitOfWork.CommitAsync();
+        }
     }
 }

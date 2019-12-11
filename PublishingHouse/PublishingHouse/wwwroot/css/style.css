@@ -395,3 +395,24 @@ footer {
     height: 3rem;
     width: auto;
 }
+
+
+
+
+
+/*hanler*/
+.handler {
+    background-color: #ffecb3;     
+}
+
+.handler-item a {
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #000000;
+}
+
+.handler-img {
+    width: 5rem;
+    height: auto;
+}

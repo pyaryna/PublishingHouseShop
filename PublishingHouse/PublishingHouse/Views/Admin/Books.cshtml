@@ -1,0 +1,68 @@
+﻿@model IEnumerable<BookPreviewDto>
+
+
+<div class="handler padding">
+    <ul class="list-inline">
+        <li class="list-inline-item handler-item">
+            <a asp-controller="Admin" asp-action="Books" class="btn">Книги</a>
+        </li>
+        <li class="list-inline-item handler-item">
+            <a asp-controller="Admin" asp-action="Authors" class="btn">Автори</a>
+        </li>
+        <li class="list-inline-item handler-item">
+            <a asp-controller="Admin" asp-action="Categories" class="btn">Категорії</a>
+        </li>
+        <li class="list-inline-item handler-item">
+            <a asp-controller="Admin" asp-action="Customers" class="btn">Покупці</a>
+        </li>
+    </ul>
+</div>
+<div>
+    <h1>Книги</h1>
+    <a class="btn btn-danger mb-3" asp-action="Create"
+       asp-controller="Book">Додати нову книгу</a>
+    @if (Model.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Обкладинка</th>
+                    <th scope="col">Назва</th>
+                    <th scope="col">Ціна</th>
+                    <th scope="col">Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in Model)
+                {
+                    <tr>
+                        <th>@book.Id</th>
+                        <td><img src=@book.ImageUrl class="handler-img" asp-append-version="true" alt="book image" /></td>
+                        <td>@book.Title</td>
+                        <td>@book.Price</td>
+                        <td>
+                            <form asp-controller="Book" asp-action="Delete" asp-route-id="@book.Id" method="post">
+
+                                <a class="btn btn-warning m-1" asp-controller="Book" asp-action="Update" asp-route-id="@book.Id">
+                                    Редагувати
+                                </a>
+                                <button type="submit" class="btn btn-danger m-1"
+                                        onclick="return confirm('Ви впевнені, що хочете видалити книгу: @book.Title?')">
+                                    Видалити
+                                </button>
+
+                            </form>
+                        </td>
+                    </tr>
+                }                
+
+            </tbody>
+        </table>
+        
+    }
+    else
+    {
+        <p>У Вас поки немає книг.</p>
+    }
+</div>

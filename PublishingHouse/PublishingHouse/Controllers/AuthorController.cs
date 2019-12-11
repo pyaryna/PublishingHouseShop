@@ -26,9 +26,22 @@ namespace PublishingHouse.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(AddAuthorDto addAuthor)
+        public async Task<IActionResult> Create(AddAuthorDto addAuthor)
         {
+            if (ModelState.IsValid)
+            {
+                await _authorService.AddAuthorAsync(addAuthor);
+                return RedirectToAction("authors", "admin");
+            }
+
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _authorService.RemoveAuthorByIdAsync(id);
+            return RedirectToAction("authors", "admin");
         }
     }
 }

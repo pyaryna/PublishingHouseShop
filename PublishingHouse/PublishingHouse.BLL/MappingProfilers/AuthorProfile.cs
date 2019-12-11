@@ -13,6 +13,8 @@ namespace PublishingHouse.BLL.MappingProfilers
         {
             CreateMap<Author, AuthorDto>()
                 .ReverseMap();
+
+            CreateMap<AddAuthorDto, Author>();
         }        
     }
 }

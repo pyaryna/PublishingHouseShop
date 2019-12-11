@@ -26,9 +26,22 @@ namespace PublishingHouse.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(AddCategoryDto addCategory)
+        public async Task<IActionResult> Create(AddCategoryDto addCategory)
         {
+            if (ModelState.IsValid)
+            {
+                await _categoryService.AddCategoryAsync(addCategory);
+                return RedirectToAction("categories", "admin");
+            }
+
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _categoryService.RemoveCategoryByIdAsync(id);
+            return RedirectToAction("categories", "admin");
         }
     }
 }

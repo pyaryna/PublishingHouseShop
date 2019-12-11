@@ -38,5 +38,14 @@ namespace PublishingHouse.BLL.Services
 
             return _mapper.Map<Author, AuthorDto>(authorEntity);
         }
+
+        public async Task RemoveAuthorByIdAsync(int id)
+        {
+            var author = await _unitOfWork.Authors.FindAsync(id);
+
+            _unitOfWork.Authors.Remove(author);
+
+            await _unitOfWork.CommitAsync();
+        }
     }
 }

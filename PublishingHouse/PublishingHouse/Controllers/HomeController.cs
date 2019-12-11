@@ -51,17 +51,19 @@ namespace PublishingHouse.Controllers
         {
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress(callbackDto.Email));
-            message.To.Add(new MailboxAddress("p.yaryna@gmail.com"));
             message.Subject = callbackDto.Issue;
             message.Body = new TextPart
             {
                 Text = callbackDto.Message
             };
-            using(var client = new SmtpClient())
-            {
-                client.Send(message);
-            }
-                
+            //using(var client = new SmtpClient())
+            //{
+            //    client.Connect("smtp.server.com");
+            //    client.Send(message);
+
+            //    client.Disconnect(true);
+            //}
+
             return View();
         }
 
