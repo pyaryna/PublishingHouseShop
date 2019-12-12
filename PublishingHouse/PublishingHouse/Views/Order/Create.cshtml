@@ -1,0 +1,46 @@
+﻿@model OrderDto
+
+<div>
+    <h2>Замовлення</h2>
+
+    <form asp-controller="Order" asp-action="Create" asp-route-carts="@Model" method="post">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Назва</th>
+                    <th scope="col">Ціна</th>
+                    <th scope="col">Кількість</th>
+                    <th scope="col">Сума</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cart in Model.Carts)
+                {
+                    <tr>
+                        <td><img src=@cart.Book.ImageUrl class="handler-img" asp-append-version="true" alt="book image" /></td>
+                        <td>@cart.Book.Title</td>
+                        <td>@cart.Book.Price</td>
+                        <td>
+                            @cart.Amount
+                        </td>
+                        <td>
+                            @cart.Book.Price * @cart.Amount
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+        <a class="btn btn-warning m-1" asp-controller="Cart" asp-action="Books">
+            Змінити
+        </a>
+
+        <button type="submit" class="btn btn-warning m-1">
+            Завершити оформлення
+        </button>
+    </form>
+    
+</div>
+

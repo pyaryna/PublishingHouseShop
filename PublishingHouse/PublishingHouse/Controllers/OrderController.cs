@@ -14,25 +14,34 @@ namespace PublishingHouse.Controllers
     [Authorize]
     public class OrderController : Controller
     {
-        private IBookService _bookService;
+        private IOrderService _orderService;
         private UserManager<Customer> _userManager;
 
-        public OrderController(IBookService bookService, UserManager<Customer> userManager)
+        public OrderController(IOrderService orderService, UserManager<Customer> userManager)
         {
-            _bookService = bookService;
+            _orderService = orderService;
             _userManager = userManager;
-        }        
-
-        [HttpGet]
-        public IActionResult Buy()
-        {
-            return View();
         }
 
-        //[HttpPost]
-        //public Task<IActionResult> Buy(int id)
+        //[HttpGet]
+        //public IActionResult Create(IEnumerable<CartDto> carts)
         //{
-        //    return View();
+        //    OrderDto order = new OrderDto
+        //    {
+        //        Carts = carts.ToList()
+        //    };
+        //    return View(order);
         //}
+
+        [HttpPost]
+        public IActionResult Create(IEnumerable<CartDto> carts)
+        {
+            OrderDto order = new OrderDto
+            {
+                Carts = carts.ToList()
+            };
+            return View(order);
+        }
+       
     }
 }

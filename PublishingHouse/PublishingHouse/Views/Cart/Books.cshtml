@@ -6,7 +6,7 @@
 
         @if (Model.Any())
         {
-            <form asp-controller="Order" asp-action="Create" method="post">
+            <form asp-controller="Order" asp-action="Create" asp-route-carts="@Model" method="post">
                 <table class="table">
                     <thead>
                         <tr>
