@@ -39,9 +39,9 @@ namespace PublishingHouse.BLL.Services
             await _unitOfWork.CommitAsync();
         }
 
-        public async Task RemoveBookByIdAsync(int bookId, string customerId)
+        public async Task RemoveCartByIdAsync(int id)
         {
-            var cart = await _unitOfWork.Carts.FindAsync(bookId, customerId);
+            var cart = await _unitOfWork.Carts.FindAsync(id);
 
             _unitOfWork.Carts.Remove(cart);
 

@@ -13,6 +13,14 @@ namespace PublishingHouse.DAL.Repositories
     {
         public CartRepository(PublishingHouseContext context) : base(context) { }
 
+        public async Task<Cart> FindAsync(int id)
+        {
+            return await Context.Carts
+                .Include(c => c.Book)
+                .Include(c => c.Customer)
+                .FirstOrDefaultAsync(d => d.Id == id);
+        }
+
         public async Task<Cart> FindAsync(int bookId, string customerId)
         {
             return await Context.Carts

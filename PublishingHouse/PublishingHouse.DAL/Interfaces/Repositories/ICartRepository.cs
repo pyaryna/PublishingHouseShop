@@ -8,6 +8,7 @@ namespace PublishingHouse.DAL.Interfaces.Repositories
 {
     public interface ICartRepository : IRepository<Cart, int>
     {
+        Task<Cart> FindAsync(int id);
         Task<Cart> FindAsync(int bookId, string customerId);
 
         Task<IEnumerable<Cart>> GetUserCartsAsync(string id);

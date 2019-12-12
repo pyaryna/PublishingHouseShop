@@ -12,6 +12,6 @@ namespace PublishingHouse.BLL.Interfaces
 
         Task AddCartAsync(AddCartDto addCart);
 
-        Task RemoveBookByIdAsync(int bookId, string customerId);
+        Task RemoveCartByIdAsync(int id);
     }
 }

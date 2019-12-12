@@ -37,10 +37,17 @@ namespace PublishingHouse.Controllers
         }
 
         [HttpGet]
-        public IActionResult Books()
+        public async Task<IActionResult> Books()
         {
+            var cart = await _cartService.GetCartForUserAsync((await _userManager.GetUserAsync(HttpContext.User)).Id);
+            return View(cart);
+        }
 
-            return View();
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _cartService.RemoveCartByIdAsync(id);
+            return RedirectToAction("books", "cart");
         }
     }
 }

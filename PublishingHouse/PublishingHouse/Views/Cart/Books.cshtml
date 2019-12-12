@@ -1,45 +1,72 @@
 ﻿@model IEnumerable<CartDto>
 
-<h2>Кошик</h2>
+    <div>
 
-@if (Model != null)
-{
-    <form>
-        <table>
-            <thead>
-                <tr>
-                    <th scope="col">Додані</th>
-                    <th scope="col">Ціна</th>
-                    <th scope="col">Кількість</th>
-                    <th scope="col">Сума</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var book in Model)
-                {
-                    <tr>
-                        <th scope="row">
-                            @book.Book.ImageUrl
-                            @book.Book.Title
-                        </th>
-                        <td>@book.Book.Price</td>
-                        <td>
-                            
-                        </td>
-                        <td>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </form>
-}
-else
-{
-    <p>
-        Ваш Кошик поки порожній.
-    </p>
-    <a class="btn btn-danger" asp-controller="home" asp-action="index">
-        Почати покупки
-    </a>
-}
+        <h2>Кошик</h2>
+
+        @if (Model.Any())
+        {
+            <form asp-controller="Order" asp-action="Create" method="post">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Назва</th>
+                            <th scope="col">Ціна</th>
+                            <th scope="col">Кількість</th>
+                            <th scope="col">Сума</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var cart in Model)
+                        {
+                            <tr>
+                                <td><img src=@cart.Book.ImageUrl class="handler-img" asp-append-version="true" alt="book image" /></td>
+                                <td>@cart.Book.Title</td>
+                                <td>@cart.Book.Price</td>
+                                <td>
+                                    <input asp-for="@cart.Amount" class="form-control" value="1" />
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    <div>
+                                        <button type="submit" class="btn btn-danger m-1 form-submit"
+                                                asp-controller="Cart" asp-action="Delete" asp-route-id="@cart.Id">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                    
+                                                                        
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+
+                <p>
+                    Загальна сума
+                </p>
+                <p>
+                    СУМА
+                </p>
+
+                <button type="submit" class="btn btn-warning m-1">
+                    Оформити замовлення
+                </button>
+            </form>
+
+        }
+        else
+        {
+            <p>
+                Ваш Кошик поки порожній.
+            </p>
+            <a class="btn btn-danger" asp-controller="home" asp-action="index">
+                Почати покупки
+            </a>
+        }
+    </div>
+
