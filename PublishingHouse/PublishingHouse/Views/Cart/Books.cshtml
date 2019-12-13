@@ -6,7 +6,7 @@
 
         @if (Model.Any())
         {
-            <form asp-controller="Order" asp-action="Create" asp-route-carts="@Model" method="post">
+            <form method="post">
                 <table class="table">
                     <thead>
                         <tr>
@@ -32,10 +32,10 @@
                                 </td>
                                 <td>
                                     <div>
-                                        <button type="submit" class="btn btn-danger m-1 form-submit"
+                                        @*<button type="submit" class="btn btn-danger m-1 form-submit"
                                                 asp-controller="Cart" asp-action="Delete" asp-route-id="@cart.Id">
                                             <i class="fas fa-times"></i>
-                                        </button>
+                                        </button>*@
                                     </div>
                                     
                                                                         
@@ -51,6 +51,7 @@
                 </p>
                 <p>
                     СУМА
+                    @Model.Count()
                 </p>
 
                 <button type="submit" class="btn btn-warning m-1">

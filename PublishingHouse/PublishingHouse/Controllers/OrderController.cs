@@ -33,13 +33,9 @@ namespace PublishingHouse.Controllers
         //    return View(order);
         //}
 
-        [HttpPost]
-        public IActionResult Create(IEnumerable<CartDto> carts)
+        [HttpGet]
+        public IActionResult Create(OrderDto order)
         {
-            OrderDto order = new OrderDto
-            {
-                Carts = carts.ToList()
-            };
             return View(order);
         }
        

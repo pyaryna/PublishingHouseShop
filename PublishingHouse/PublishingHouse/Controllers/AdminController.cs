@@ -30,7 +30,7 @@ namespace PublishingHouse.Controllers
         [HttpGet]
         public async Task<IActionResult> Books()
         {
-            var books = await _bookService.GetAllBooksInfoAsync();
+            var books = await _bookService.GetAllBooksInfoAsync(null);
             return View(books);
         }
 

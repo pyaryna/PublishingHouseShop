@@ -36,8 +36,59 @@ namespace PublishingHouse.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var books = await _bookService.GetAllBooksInfoAsync();
-            return View(books);
+            PreviewDto preview = new PreviewDto();
+            preview.Books = await _bookService.GetAllBooksInfoAsync(null);
+            preview.Request = new BLL.Request.BookRequest();
+            preview.Categories = (await _categoryService.GetAllCategoriesAsync())
+                .Select(x => new SelectListItem
+                {
+                    Text = x.Name,
+                    Value = x.Id.ToString(),
+                    Selected = x.Id == preview.Request.CategoryId
+                });
+            preview.Authors = (await _authorService.GetAllAuthorsAsync())
+                .Select(x => new SelectListItem
+                {
+                    Text = x.Name,
+                    Value = x.Id.ToString(),
+                    Selected = x.Id == preview.Request.AuthorId
+                });
+                return View(preview);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Index(PreviewDto preview)
+        {
+            if(preview.Sorting == 0)
+            {
+                preview.Request.SortByPrice = false;
+            }
+            else if (preview.Sorting == 1)
+            {
+                preview.Request.SortByPrice = true;
+                preview.Request.IsAscending = true;
+            }
+            else
+            {
+                preview.Request.SortByPrice = true;
+                preview.Request.IsAscending = false;
+            }
+            preview.Books = await _bookService.GetAllBooksInfoAsync(preview);
+            preview.Categories = (await _categoryService.GetAllCategoriesAsync())
+                .Select(x => new SelectListItem
+                {
+                    Text = x.Name,
+                    Value = x.Id.ToString(),
+                    Selected = x.Id == preview.Request.CategoryId
+                });
+            preview.Authors = (await _authorService.GetAllAuthorsAsync())
+                .Select(x => new SelectListItem
+                {
+                    Text = x.Name,
+                    Value = x.Id.ToString(),
+                    Selected = x.Id == preview.Request.AuthorId
+                });
+            return View(preview);
         }
 
         [HttpGet]

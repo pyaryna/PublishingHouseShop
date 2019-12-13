@@ -44,6 +44,16 @@ namespace PublishingHouse.Controllers
         }
 
         [HttpPost]
+        public IActionResult Books(IEnumerable<CartDto> carts)
+        {
+            OrderDto order = new OrderDto
+            {
+                Carts = carts.ToList()
+            };
+            return RedirectToAction("create", "order", order);
+        }
+
+        [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
             await _cartService.RemoveCartByIdAsync(id);

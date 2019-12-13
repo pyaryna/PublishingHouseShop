@@ -28,7 +28,7 @@ namespace PublishingHouse.Extensions
                 {
                     Text = x.Name,
                     Value = x.Id.ToString(),
-                    Selected = x.Id == book.CategoryId
+                    Selected = x.Id == book.AuthorId
                 });
             return book;
         }
@@ -52,10 +52,9 @@ namespace PublishingHouse.Extensions
                 {
                     Text = x.Name,
                     Value = x.Id.ToString(),
-                    Selected = x.Id == book.CategoryId
+                    Selected = x.Id == book.AuthorId
                 });
             return book;
         }
-
     }
 }

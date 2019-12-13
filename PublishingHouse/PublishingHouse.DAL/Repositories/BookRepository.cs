@@ -27,14 +27,30 @@ namespace PublishingHouse.DAL.Repositories
                 .FirstOrDefaultAsync(d => d.Id == id);
         }
 
-        public async Task<IEnumerable<Book>> GetAllBooksAsync(int? skip, int? take)
+        public async Task<IEnumerable<Book>> GetAllBooksAsync(int? authorId, int? categoryId, bool sortByPrice, bool ascending, int? skip, int? take)
         {
             var books = GetBooksMainInfo();
 
-            //if (skip.HasValue && take.HasValue)
-            //{
-            //    dishes = dishes.Paginate(skip.Value, take.Value);
-            //}
+            if (authorId.HasValue)
+            {
+                books = books.Where(b => b.BookAuthors.Any(ba => ba.AuthorId == authorId));
+            }
+
+            if (categoryId.HasValue)
+            {
+                books = books.Where(b => b.BookCategories.Any(bc => bc.CategoryId == categoryId));
+            }
+
+            if(sortByPrice == true)
+            {
+                books = ascending ? books.OrderBy(b => b.Price) : books.OrderByDescending(b => b.Price);
+            }
+
+            if (skip.HasValue && take.HasValue)
+            {
+                books = books.Skip(skip.Value)
+                .Take(take.Value);
+            }
 
             return await books.ToListAsync();
         }
@@ -43,7 +59,7 @@ namespace PublishingHouse.DAL.Repositories
         {
             return Context.Books
                 .Include(b => b.BookAuthors)
-                .ThenInclude(ba => ba.Author)
+                .ThenInclude(ba => ba.Author)                
                 .Include(b => b.BookCategories)
                 .ThenInclude(bc => bc.Category)
                 .Include(b => b.BookOrders)

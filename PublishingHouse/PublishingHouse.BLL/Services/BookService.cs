@@ -29,9 +29,28 @@ namespace PublishingHouse.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<BookPreviewDto>> GetAllBooksInfoAsync()
+#nullable enable
+        public async Task<IEnumerable<BookPreviewDto>> GetAllBooksInfoAsync(PreviewDto? preview)
         {
-            IEnumerable<Book> books = await _unitOfWork.Books.GetAllBooksAsync(null, null);
+            IEnumerable<Book> books = null;
+            if (preview != null)
+            {
+                books = await _unitOfWork.Books.GetAllBooksAsync(preview.Request.AuthorId,
+                                                                                preview.Request.CategoryId,
+                                                                                preview.Request.SortByPrice,
+                                                                                preview.Request.IsAscending,
+                                                                                preview.Request.Skip,
+                                                                                preview.Request.Take);
+            }
+            else
+            {
+                books = await _unitOfWork.Books.GetAllBooksAsync(null,                                                                              null,
+                                                                                false,
+                                                                                false,
+                                                                                null,
+                                                                                null);
+            }
+                      
 
             return books.Select(_mapper.Map<Book, BookPreviewDto>)
                 .ToArray();            

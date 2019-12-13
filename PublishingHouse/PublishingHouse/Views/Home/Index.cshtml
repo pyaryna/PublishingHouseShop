@@ -1,9 +1,42 @@
-﻿@model IEnumerable<BookPreviewDto>
+﻿@*@model IEnumerable<BookPreviewDto>*@
+@model PreviewDto
 @inject SignInManager<Customer> _signInManager;
 
-<div class="container">
+<div class="padding">
+    <form asp-controller="Home" asp-action="Index" method="post">
+        <ul class="list-inline">
+            <li class="list-inline-item request-item">
+                <div class="form-group">
+                    <label asp-for="@Model.Sorting">Ціна</label>
+                    <select asp-for="@Model.Sorting" class="form-control">
+                        <option value="0">не сортувати</option>
+                        <option value="1">по зростанню</option>
+                        <option value="2">по спаданню</option>
+                    </select>
+                </div>
+            </li>
+            <li class="list-inline-item request-item">
+                <div class="form-group">
+                    <label asp-for="@Model.Request.AuthorId">Автор</label>
+                    @Html.DropDownListFor(x => x.Request.AuthorId, Model.Authors, "Автор", new { @id = "chooseAuthor", @class = "form-control" })
+                </div>
+            </li>
+            <li class="list-inline-item request-item">
+                <div class="form-group">
+                    <label asp-for="@Model.Request.CategoryId">Категорія</label>
+                    @Html.DropDownListFor(x => x.Request.CategoryId, Model.Categories, "Категорія", new { @id = "chooseCategory", @class = "form-control" })
+                </div>
+            </li>
+        </ul>
+        <button type="submit" class="btn btn-primary">
+            Виконати
+        </button>
+    </form>
+</div>
+
+<div>
     <div class="row padding">
-        @foreach (var book in Model)
+        @foreach (var book in Model.Books)
         {
             <div class="col-md-3 padding">
                 <div class="card">
@@ -25,7 +58,7 @@
                                 <button type="submit" class="btn btn-danger m-1">
                                     <i class="fas fa-shopping-cart"></i>
                                 </button>
-                            </form>                            
+                            </form>
                         }
 
                         @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))

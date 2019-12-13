@@ -8,7 +8,8 @@ namespace PublishingHouse.BLL.Interfaces
 {
     public interface IBookService
     {
-        Task<IEnumerable<BookPreviewDto>> GetAllBooksInfoAsync();
+#nullable enable
+        Task<IEnumerable<BookPreviewDto>> GetAllBooksInfoAsync(PreviewDto? preview);
         Task<BookDto> GetOneBookInfoAsync(int id);
         Task<BookPreviewDto> GetOneBookPreviewAsync(int id);
         Task<UpdateBookDto> GetBookForUpdateAsync(int id);
