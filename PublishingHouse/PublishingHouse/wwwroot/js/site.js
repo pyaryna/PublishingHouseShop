@@ -19,3 +19,12 @@ function chooseDeliver(value) {
         $('#' + 'deliverAddress').hide();
     }
 }
+
+function chooseAmount(price, amount) {
+    $('#' + 'deliverAddress').text = price * amount;
+}
+
+function calculate(id, x, y) {
+    var sum = 'sum' + id;
+    $('#' + sum).value = x * y;
+}

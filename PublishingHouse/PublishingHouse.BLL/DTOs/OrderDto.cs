@@ -18,6 +18,6 @@ namespace PublishingHouse.BLL.DTOs
         public DateTime DateTime { get; set; }
         public int TotalSum { get; set; }
 
-        public ICollection<BookPreviewDto> Books { get; set; }
+        public List<BookOrderPreviewDto> Books { get; set; }
     }
 }

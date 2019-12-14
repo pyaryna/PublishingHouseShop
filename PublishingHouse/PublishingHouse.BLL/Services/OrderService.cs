@@ -59,6 +59,14 @@ namespace PublishingHouse.BLL.Services
             return _mapper.Map<Order, OrderDto>(await _unitOfWork.Orders.FindAsync(id));
         }
 
+        public async Task<IEnumerable<OrderDto>> GetOrdersForUserAsync(string id)
+        {
+            IEnumerable<Order> orders = await _unitOfWork.Orders.GetUserCartsAsync(id);
+
+            return orders.Select(_mapper.Map<Order, OrderDto>)
+                .ToArray();
+        }
+
         public async Task<OrderDto> AddOrderAsync(AddOrderDto addOrder)
         {
             var orderEntity = _unitOfWork.Orders.Add(_mapper.Map<AddOrderDto, Order>(addOrder));

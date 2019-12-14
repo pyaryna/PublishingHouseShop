@@ -1,0 +1,63 @@
+﻿@model List<OrderDto>
+
+<div>
+    <h2>Кошик</h2>
+    @if (Model.Any())
+    {
+        <form method="post">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Товари</th>
+                        <th scope="col">Сума</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td>@Model[i].Id</td>
+                            <td>
+                                @foreach(var book in Model[i].Books)
+                                {
+                                    <a>
+                                        @book.Title
+                                    </a>
+                                }
+
+                            </td>
+                            <td>
+                                @Model[i].TotalSum
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <div>
+                                    <button type="submit" class="btn btn-danger m-1 form-submit"
+                                            asp-controller="Order" asp-action="Delete" asp-route-id="@Model[i].Id">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+
+        </form>
+
+    }
+    else
+    {
+        <p>
+            У вас поки немає замовлень.
+        </p>
+        <a class="btn btn-danger" asp-controller="home" asp-action="index">
+            Почати покупки
+        </a>
+    }
+</div>
+

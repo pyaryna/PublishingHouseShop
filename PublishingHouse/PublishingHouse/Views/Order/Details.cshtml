@@ -27,7 +27,7 @@
                     <th scope="col">Сума</th>
                 </tr>
             </thead>
-            @*<tbody>
+            <tbody>
                 @for (int i = 0; i < Model.Books.Count; i++)
                 {
                     <tr>
@@ -35,15 +35,35 @@
                         <td>@Model.Books[i].Title</td>
                         <td>@Model.Books[i].Price</td>
                         <td>
-                            @Model.Carts[i].Amount
+                            @Model.Books[i].Amount
                         </td>
                         <td>
-                            @Model.Carts[i].Book.Price * @Model.Carts[i].Amount
+                            @Model.Books[i].Price * @Model.Books[i].Amount
                         </td>
                     </tr>
                 }
 
-            </tbody>*@
+            </tbody>
         </table>
-       
+
+        <h2>Загальна сума:</h2>
+        <p>
+            @Model.TotalSum
+        </p>
+
+        <form asp-controller="Order" asp-action="Delete" asp-route-id="@Model.Id" method="post">
+
+            <span id="confirmDeleteSpan_@Model.Id" style="display:none">
+                <span>Ви впевнені, що хочете видалити?</span>
+                <button type="submit" class="btn btn-danger m-1">Так</button>
+                <a href="#" class="btn btn-primary m-1"
+                   onclick="confirmDelete('@Model.Id', false)">Ні</a>
+            </span>
+
+            <span id="deleteSpan_@Model.Id">
+                <a href="#" class="btn btn-danger m-1"
+                   onclick="confirmDelete('@Model.Id', true)">Видалити</a>
+            </span>
+        </form>
+
     </div>

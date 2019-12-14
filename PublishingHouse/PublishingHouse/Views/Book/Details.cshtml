@@ -27,7 +27,8 @@
         @if (_signInManager.IsSignedIn(User) && !User.IsInRole("Admin"))
         {
             <form asp-controller="Cart" asp-action="Add" asp-route-bookId="@Model.Id" method="post">
-                <button type="submit" class="btn btn-danger m-1">
+                <button type="submit" class="btn btn-danger m-1"
+                        onclick="return alert('Книга: @Model.Title додана у кошик')">
                     КУПИТИ  
                 </button>
             </form>

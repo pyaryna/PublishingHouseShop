@@ -16,7 +16,6 @@ namespace PublishingHouse.DAL.Repositories
         public async Task<Comment> FindAsync(int id)
         {
             return await Context.Comments
-                //.Include(c => c.Book)
                 .Include(c => c.Customer)
                 .FirstOrDefaultAsync(d => d.Id == id);
         }

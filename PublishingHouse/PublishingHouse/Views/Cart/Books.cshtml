@@ -29,7 +29,7 @@
                                     <input hidden asp-for="@Model[i].Book.ImageUrl" />
                                     <input hidden asp-for="@Model[i].Book.Title" />
                                     <input hidden asp-for="@Model[i].Book.Price" />
-                                    <input asp-for="@Model[i].Amount" class="form-control" value="1" />
+                                    <input asp-for="@Model[i].Amount" class="form-control" value="1"/>
                                 </td>
                                 <td>
                                 </td>
@@ -48,13 +48,6 @@
 
                     </tbody>
                 </table>
-
-                <p>
-                    Загальна сума
-                </p>
-                <p>
-                    СУМА
-                </p>
 
                 <button asp-controller="order" asp-action="create" type="submit" class="btn btn-warning m-1">
                     Оформити замовлення

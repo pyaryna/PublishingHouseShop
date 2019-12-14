@@ -9,5 +9,6 @@ namespace PublishingHouse.DAL.Interfaces.Repositories
     public interface IOrderRepository : IRepository<Order, int>
     {
         Task<Order> FindAsync(int id);
+        Task<IEnumerable<Order>> GetUserCartsAsync(string id);
     }
 }

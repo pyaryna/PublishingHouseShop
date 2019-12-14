@@ -11,7 +11,7 @@ namespace PublishingHouse.BLL.MappingProfilers
     {
         public BookOrderProfile()
         {
-            CreateMap<BookOrder, BookPreviewDto>()
+            CreateMap<BookOrder, BookOrderPreviewDto>()
                 .ForMember(b => b.Id, opt => opt.MapFrom(x => x.Book.Id))
                 .ForMember(b => b.ImageUrl, opt => opt.MapFrom(x => x.Book.ImageUrl))
                 .ForMember(b => b.Price, opt => opt.MapFrom(x => x.Book.Price))
