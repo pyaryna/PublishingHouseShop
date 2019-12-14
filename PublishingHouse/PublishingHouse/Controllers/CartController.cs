@@ -39,18 +39,10 @@ namespace PublishingHouse.Controllers
         [HttpGet]
         public async Task<IActionResult> Books()
         {
-            var cart = await _cartService.GetCartForUserAsync((await _userManager.GetUserAsync(HttpContext.User)).Id);
+            var cart = (await _cartService.GetCartForUserAsync((
+                                await _userManager.GetUserAsync(HttpContext.User)).Id))
+                                .ToList();
             return View(cart);
-        }
-
-        [HttpPost]
-        public IActionResult Books(IEnumerable<CartDto> carts)
-        {
-            OrderDto order = new OrderDto
-            {
-                Carts = carts.ToList()
-            };
-            return RedirectToAction("create", "order", order);
         }
 
         [HttpPost]

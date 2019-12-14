@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PublishingHouse.DAL;
 
 namespace PublishingHouse.DAL.Migrations
 {
     [DbContext(typeof(PublishingHouseContext))]
-    partial class PublishingHouseContextModelSnapshot : ModelSnapshot
+    [Migration("20191214111126_AddDeliverToOrder")]
+    partial class AddDeliverToOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

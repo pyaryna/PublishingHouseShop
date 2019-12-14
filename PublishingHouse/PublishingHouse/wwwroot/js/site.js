@@ -10,3 +10,12 @@
         $('#' + confirmDeleteSpan).hide();
     }
 }
+
+function chooseDeliver(value) {
+    if (value == "доставка") {
+        $('#' + 'deliverAddress').show();
+    }
+    else {
+        $('#' + 'deliverAddress').hide();
+    }
+}

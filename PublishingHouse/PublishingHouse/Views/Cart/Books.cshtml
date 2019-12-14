@@ -1,9 +1,7 @@
-﻿@model IEnumerable<CartDto>
+﻿@model List<CartDto>
 
     <div>
-
         <h2>Кошик</h2>
-
         @if (Model.Any())
         {
             <form method="post">
@@ -19,26 +17,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var cart in Model)
-                        {
+                        @for(int i = 0; i < Model.Count; i++)
+                        {                            
                             <tr>
-                                <td><img src=@cart.Book.ImageUrl class="handler-img" asp-append-version="true" alt="book image" /></td>
-                                <td>@cart.Book.Title</td>
-                                <td>@cart.Book.Price</td>
+                                <td><img src=@Model[i].Book.ImageUrl class="handler-img" asp-append-version="true" alt="book image" /></td>
+                                <td>@Model[i].Book.Title</td>
+                                <td>@Model[i].Book.Price</td>
                                 <td>
-                                    <input asp-for="@cart.Amount" class="form-control" value="1" />
+                                    <input hidden asp-for="@Model[i].Id" />
+                                    <input hidden asp-for="@Model[i].Book.Id" />
+                                    <input hidden asp-for="@Model[i].Book.ImageUrl" />
+                                    <input hidden asp-for="@Model[i].Book.Title" />
+                                    <input hidden asp-for="@Model[i].Book.Price" />
+                                    <input asp-for="@Model[i].Amount" class="form-control" value="1" />
                                 </td>
                                 <td>
                                 </td>
                                 <td>
                                     <div>
-                                        @*<button type="submit" class="btn btn-danger m-1 form-submit"
-                                                asp-controller="Cart" asp-action="Delete" asp-route-id="@cart.Id">
+                                        <button type="submit" class="btn btn-danger m-1 form-submit"
+                                                asp-controller="Cart" asp-action="Delete" asp-route-id="@Model[i].Id">
                                             <i class="fas fa-times"></i>
-                                        </button>*@
+                                        </button>
                                     </div>
-                                    
-                                                                        
+
+
                                 </td>
                             </tr>
                         }
@@ -51,10 +54,9 @@
                 </p>
                 <p>
                     СУМА
-                    @Model.Count()
                 </p>
 
-                <button type="submit" class="btn btn-warning m-1">
+                <button asp-controller="order" asp-action="create" type="submit" class="btn btn-warning m-1">
                     Оформити замовлення
                 </button>
             </form>

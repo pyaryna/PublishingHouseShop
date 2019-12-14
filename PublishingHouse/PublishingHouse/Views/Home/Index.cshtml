@@ -1,5 +1,4 @@
-﻿@*@model IEnumerable<BookPreviewDto>*@
-@model PreviewDto
+﻿@model PreviewDto
 @inject SignInManager<Customer> _signInManager;
 
 <div class="padding">
@@ -7,7 +6,7 @@
         <ul class="list-inline">
             <li class="list-inline-item request-item">
                 <div class="form-group">
-                    <label asp-for="@Model.Sorting">Ціна</label>
+                    <label asp-for="@Model.Sorting" class="centered">Ціна</label>
                     <select asp-for="@Model.Sorting" class="form-control">
                         <option value="0">не сортувати</option>
                         <option value="1">по зростанню</option>
@@ -17,20 +16,22 @@
             </li>
             <li class="list-inline-item request-item">
                 <div class="form-group">
-                    <label asp-for="@Model.Request.AuthorId">Автор</label>
+                    <label asp-for="@Model.Request.AuthorId" class="centered">Автор</label>
                     @Html.DropDownListFor(x => x.Request.AuthorId, Model.Authors, "Автор", new { @id = "chooseAuthor", @class = "form-control" })
                 </div>
             </li>
             <li class="list-inline-item request-item">
                 <div class="form-group">
-                    <label asp-for="@Model.Request.CategoryId">Категорія</label>
+                    <label asp-for="@Model.Request.CategoryId" class="centered">Категорія</label>
                     @Html.DropDownListFor(x => x.Request.CategoryId, Model.Categories, "Категорія", new { @id = "chooseCategory", @class = "form-control" })
                 </div>
             </li>
-        </ul>
-        <button type="submit" class="btn btn-primary">
-            Виконати
-        </button>
+            <li class="ml-auto">
+                <button type="submit" class="btn btn-danger">
+                    Виконати
+                </button>
+            </li>
+        </ul>     
     </form>
 </div>
 

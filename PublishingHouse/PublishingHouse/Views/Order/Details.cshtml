@@ -1,0 +1,49 @@
+﻿@model OrderDto
+@inject SignInManager<Customer> _signInManager;
+
+    <div class="container">
+        <h4 class="modal-title">Ваше замовлення</h4>
+        @if (Model.DeliverAddress != "самовивіз")
+        {
+
+        }
+        else
+        {
+            <p>
+                Ім'я: @Model.Name<br>
+                Прізвище: @Model.Surname<br>
+                Номер телефону: @Model.Phone<br>
+                Доставка: @Model.Deliver<br>
+            </p>
+        }
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Назва</th>
+                    <th scope="col">Ціна</th>
+                    <th scope="col">Кількість</th>
+                    <th scope="col">Сума</th>
+                </tr>
+            </thead>
+            @*<tbody>
+                @for (int i = 0; i < Model.Books.Count; i++)
+                {
+                    <tr>
+                        <td><img src=@Model.Books[i].ImageUrl class="handler-img" asp-append-version="true" alt="book image" /></td>
+                        <td>@Model.Books[i].Title</td>
+                        <td>@Model.Books[i].Price</td>
+                        <td>
+                            @Model.Carts[i].Amount
+                        </td>
+                        <td>
+                            @Model.Carts[i].Book.Price * @Model.Carts[i].Amount
+                        </td>
+                    </tr>
+                }
+
+            </tbody>*@
+        </table>
+       
+    </div>

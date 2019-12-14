@@ -101,19 +101,19 @@ namespace PublishingHouse.Controllers
         public IActionResult Contacts(CallbackDto callbackDto)
         {
             var message = new MimeMessage();
-            message.From.Add(new MailboxAddress(callbackDto.Email));
+            message.From.Add(new MailboxAddress("", callbackDto.Email));
             message.Subject = callbackDto.Issue;
-            message.Body = new TextPart
+            message.Body = new TextPart("Plain")
             {
                 Text = callbackDto.Message
             };
-            //using(var client = new SmtpClient())
-            //{
-            //    client.Connect("smtp.server.com");
-            //    client.Send(message);
+            using (var client = new SmtpClient())
+            {
+                client.Connect("smtp.google.com", 25, false);
+                client.Send(message);
 
-            //    client.Disconnect(true);
-            //}
+                client.Disconnect(true);
+            }
 
             return View();
         }

@@ -13,13 +13,25 @@ namespace PublishingHouse.DAL.EntityConfigurations
         {
             builder.HasKey(o => o.Id);
 
+            builder.Property(o => o.Name)
+                .IsRequired();
+
+            builder.Property(o => o.Surname)
+                .IsRequired();
+
+            builder.Property(o => o.Phone)
+                .IsRequired();
+
             builder.Property(o => o.DateTime)
                 .IsRequired();
 
-            builder.Property(b => b.DeliverAddress)
+            builder.Property(o => o.Deliver)
                 .IsRequired();
 
-            builder.HasMany(b => b.BookOrders)
+            builder.Property(o => o.DeliverAddress)
+                .IsRequired();
+
+            builder.HasMany(o => o.BookOrders)
                 .WithOne(bo => bo.Order)
                 .IsRequired()
                 .HasForeignKey(bo => bo.OrderId);

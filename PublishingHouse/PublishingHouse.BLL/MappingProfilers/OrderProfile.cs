@@ -13,6 +13,13 @@ namespace PublishingHouse.BLL.MappingProfilers
         {
             CreateMap<CartDto, Order>()
                  .ForMember(b => b.Id, opt => opt.Ignore());
+
+            CreateMap<AddOrderDto, Order>()
+                .ForMember(b => b.Id, opt => opt.Ignore())
+                .ForMember(b => b.BookOrders, opt => opt.Ignore());
+
+            CreateMap<Order, OrderDto>()
+                .ForMember(b => b.Books, opt => opt.MapFrom(x => x.BookOrders));
         }
     }
 }

@@ -24,20 +24,40 @@ namespace PublishingHouse.Controllers
         }
 
         //[HttpGet]
-        //public IActionResult Create(IEnumerable<CartDto> carts)
+        //public IActionResult Create(OrderDto order)
         //{
-        //    OrderDto order = new OrderDto
-        //    {
-        //        Carts = carts.ToList()
-        //    };
         //    return View(order);
         //}
 
         [HttpGet]
-        public IActionResult Create(OrderDto order)
+        [HttpPost]
+        public IActionResult Create(IEnumerable<CartDto> carts)
         {
+            AddOrderDto order = new AddOrderDto
+            {
+                Carts = carts.ToList()
+            };
             return View(order);
         }
-       
+
+        [HttpPost]
+        public async Task<IActionResult> Add(AddOrderDto addOrder)
+        {
+            if (ModelState.IsValid)
+            {
+                addOrder.DateTime = DateTime.Now;
+                var newOrder = await _orderService.AddOrderAsync(addOrder);
+                return RedirectToAction("Details", new { id = newOrder.Id });
+            }
+
+            return RedirectToAction("create", "order", new { carts = addOrder.Carts });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var order = await _orderService.GetOneOrderInfoAsync(id);
+            return View(order);
+        }
     }
 }
