@@ -14,16 +14,19 @@ namespace PublishingHouse.Controllers
         private IBookService _bookService;
         private IAuthorService _authorService;
         private ICategoryService _categoryService;
+        private IOrderService _orderService;
         private UserManager<Customer> _userManager;
 
         public AdminController(IBookService bookService, 
                                 IAuthorService authorService, 
                                 ICategoryService categoryService,
+                                IOrderService orderService,
                                 UserManager<Customer> userManager)
         {
             _bookService = bookService;
             _authorService = authorService;
             _categoryService = categoryService;
+            _orderService = orderService;
             _userManager = userManager;
         }
 
@@ -53,6 +56,20 @@ namespace PublishingHouse.Controllers
         {
             var users = _userManager.Users;
             return View(users);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Orders()
+        {
+            var orders = (await _orderService.GetAllOrdersInfoAsync()).ToList();
+            return View(orders);
+        }
+
+        [HttpGet]
+        public IActionResult Notices()
+        {
+            var notices = _userManager.Users;
+            return View(notices);
         }
 
         [HttpPost]

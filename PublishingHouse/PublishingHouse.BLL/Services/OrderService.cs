@@ -24,35 +24,17 @@ namespace PublishingHouse.BLL.Services
             _mapper = mapper;
         }
 
-        //public async Task<IEnumerable<BookPreviewDto>> GetAllBooksInfoAsync(PreviewDto preview)
-        //{
-        //    IEnumerable<Book> books = null;
-        //    if (preview != null)
-        //    {
-        //        books = await _unitOfWork.Books.GetAllBooksAsync(preview.Request.AuthorId,
-        //                                                                        preview.Request.CategoryId,
-        //                                                                        preview.Request.SortByPrice,
-        //                                                                        preview.Request.IsAscending,
-        //                                                                        preview.Request.Skip,
-        //                                                                        preview.Request.Take);
-        //    }
-        //    else
-        //    {
-        //        books = await _unitOfWork.Books.GetAllBooksAsync(null, null,
-        //                                                                        false,
-        //                                                                        false,
-        //                                                                        null,
-        //                                                                        null);
-        //    }
+        public async Task<IEnumerable<OrderDto>> GetAllOrdersInfoAsync()
+        {
+            IEnumerable<Order> orders = await _unitOfWork.Orders.GetAllOrdersAsync();
 
-
-        //    return books.Select(_mapper.Map<Book, BookPreviewDto>)
-        //        .ToArray();
-        //}
-        //public async Task<BookDto> GetOneBookInfoAsync(int id)
-        //{
-        //    return _mapper.Map<Book, BookDto>(await _unitOfWork.Books.FindAsync(id));
-        //}
+            return orders.Select(_mapper.Map<Order, OrderDto>)
+                .ToArray();
+        }
+        public async Task<BookDto> GetOneBookInfoAsync(int id)
+        {
+            return _mapper.Map<Book, BookDto>(await _unitOfWork.Books.FindAsync(id));
+        }
 
         public async Task<OrderDto> GetOneOrderInfoAsync(int id)
         {
@@ -61,7 +43,7 @@ namespace PublishingHouse.BLL.Services
 
         public async Task<IEnumerable<OrderDto>> GetOrdersForUserAsync(string id)
         {
-            IEnumerable<Order> orders = await _unitOfWork.Orders.GetUserCartsAsync(id);
+            IEnumerable<Order> orders = await _unitOfWork.Orders.GetUserOrdersAsync(id);
 
             return orders.Select(_mapper.Map<Order, OrderDto>)
                 .ToArray();

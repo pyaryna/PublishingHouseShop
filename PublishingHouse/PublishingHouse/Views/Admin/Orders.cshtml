@@ -1,7 +1,29 @@
 ﻿@model List<OrderDto>
 
+    <div class="handler padding">
+        <ul class="list-inline">
+            <li class="list-inline-item handler-item">
+                <a asp-controller="Admin" asp-action="Books" class="btn">Книги</a>
+            </li>
+            <li class="list-inline-item handler-item">
+                <a asp-controller="Admin" asp-action="Authors" class="btn">Автори</a>
+            </li>
+            <li class="list-inline-item handler-item">
+                <a asp-controller="Admin" asp-action="Categories" class="btn">Категорії</a>
+            </li>
+            <li class="list-inline-item handler-item">
+                <a asp-controller="Admin" asp-action="Customers" class="btn">Покупці</a>
+            </li>
+            <li class="list-inline-item handler-item">
+                <a asp-controller="Admin" asp-action="Orders" class="btn">Замовлення</a>
+            </li>
+            <li class="list-inline-item handler-item">
+                <a asp-controller="Admin" asp-action="Notices" class="btn">Повідомлення</a>
+            </li>
+        </ul>
+    </div>
 <div>
-    <h2>Ваші замовлення</h2>
+    <h2>Замовлення</h2>
     @if (Model.Any())
     {
         <form>
@@ -9,6 +31,7 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">Замовник</th>
                         <th scope="col">Товари</th>
                         <th scope="col">Сума</th>
                         <th scope="col"></th>
@@ -18,13 +41,18 @@
                     @for (int i = 0; i < Model.Count; i++)
                     {
                         <tr>
-                            <td>@Model[i].Id</td>
                             <td>
-                                @foreach(var book in Model[i].Books)
+                                <a asp-controller="order" asp-action="details" asp-route-id="@Model[i].Id">
+                                    @Model[i].Id
+                                </a>                            
+                            </td>
+                            <td>@Model[i].Customer.UserName</td>
+                            <td>
+                                @foreach (var book in Model[i].Books)
                                 {
-                                    <a>
+                                    <p>
                                         @book.Title<br>
-                                    </a>
+                                    </p>
                                 }
 
                             </td>

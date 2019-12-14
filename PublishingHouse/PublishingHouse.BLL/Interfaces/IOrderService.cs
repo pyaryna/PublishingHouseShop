@@ -8,6 +8,7 @@ namespace PublishingHouse.BLL.Interfaces
 {
     public interface IOrderService
     {
+        Task<IEnumerable<OrderDto>> GetAllOrdersInfoAsync();
         Task<OrderDto> GetOneOrderInfoAsync(int id);
         Task<IEnumerable<OrderDto>> GetOrdersForUserAsync(string id);
         Task<OrderDto> AddOrderAsync(AddOrderDto addOrder);

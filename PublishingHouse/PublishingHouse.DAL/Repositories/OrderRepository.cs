@@ -22,16 +22,26 @@ namespace PublishingHouse.DAL.Repositories
                 .FirstOrDefaultAsync(d => d.Id == id);
         }
 
-        public async Task<IEnumerable<Order>> GetUserCartsAsync(string id)
+        public async Task<IEnumerable<Order>> GetUserOrdersAsync(string id)
         {
-            var carts = Context.Orders
+            var orders = Context.Orders
                 .Where(o => o.CustomerId == id)
                 .Include(o => o.BookOrders)
                 .ThenInclude(bo => bo.Book)
                 .Include(c => c.Customer);
                 
 
-            return await carts.ToListAsync();
+            return await orders.ToListAsync();
+        }
+
+        public async Task<IEnumerable<Order>> GetAllOrdersAsync()
+        {
+            var orders = Context.Orders
+                .Include(o => o.BookOrders)
+                .ThenInclude(bo => bo.Book)
+                .Include(c => c.Customer);
+
+            return await orders.ToListAsync();
         }
     }
 }
