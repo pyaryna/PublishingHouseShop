@@ -9,6 +9,6 @@ namespace PublishingHouse.DAL.Interfaces.Repositories
     public interface IBookRepository : IRepository<Book, int>
     {
         Task<Book> FindAsync(int key);
-        Task<IEnumerable<Book>> GetAllBooksAsync(int? authorId, int? categoryId, bool sortByPrice, bool ascending, int? skip, int? take);
+        Task<IEnumerable<Book>> GetAllBooksAsync(int? authorId, int? categoryId, bool sortByPrice, bool ascending, int page);
     }
 }

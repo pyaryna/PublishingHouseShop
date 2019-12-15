@@ -67,6 +67,10 @@ namespace PublishingHouse.Controllers
         public async Task<IActionResult> Orders()
         {
             var orders = (await _orderService.GetAllOrdersInfoAsync()).ToList();
+            foreach (var order in orders)
+            {
+                order.TotalSum = order.Books.Sum(b => b.Amount * b.Price);
+            }
             return View(orders);
         }
 

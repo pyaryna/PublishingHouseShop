@@ -53,6 +53,14 @@
                         <p class="card-text">@book.Price грн</p>
                     </div>
                     <div class="card-footer">
+                        @if (!_signInManager.IsSignedIn(User))
+                        {
+                            <form asp-controller="Cart" asp-action="Add" asp-route-bookId="@book.Id" method="post">
+                                <button type="submit" class="btn btn-danger m-1">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </form>
+                        }                        
                         @if (_signInManager.IsSignedIn(User) && !User.IsInRole("Admin"))
                         {
                             <form asp-controller="Cart" asp-action="Add" asp-route-bookId="@book.Id" method="post">
@@ -82,4 +90,31 @@
             </div>
         }
     </div>
+    <nav aria-label="Page navigation" id="pagination-nav">
+        <ul class="pagination">
+            @if (Model.Request.HasPreviousPage)
+            {
+                <li class="padding mr-auto">
+                    <a asp-action="Index"
+                       asp-route-page="@(Model.Request.PageNumber - 1)"
+                       class="btn btn-outline-danger">
+                        <span>&laquo;</span>
+                        previous
+                    </a>
+                </li>
+
+            }
+            @if (Model.Request.HasNextPage)
+            {
+                <li class="padding ml-auto">
+                    <a asp-action="Index"
+                       asp-route-page="@(Model.Request.PageNumber + 1)"
+                       class="btn btn-outline-danger">
+                        <span>&raquo;</span>
+                        next
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
 </div>

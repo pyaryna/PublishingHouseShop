@@ -33,28 +33,33 @@ namespace PublishingHouse.BLL.Services
         public async Task<IEnumerable<BookPreviewDto>> GetAllBooksInfoAsync(PreviewDto? preview)
         {
             IEnumerable<Book> books = null;
+            var totalPages = await _unitOfWork.Books.CountAsync();
             if (preview != null)
             {
                 books = await _unitOfWork.Books.GetAllBooksAsync(preview.Request.AuthorId,
                                                                                 preview.Request.CategoryId,
                                                                                 preview.Request.SortByPrice,
                                                                                 preview.Request.IsAscending,
-                                                                                preview.Request.Skip,
-                                                                                preview.Request.Take);
+                                                                                preview.Request.PageNumber);
             }
             else
             {
                 books = await _unitOfWork.Books.GetAllBooksAsync(null,                                                                              null,
                                                                                 false,
                                                                                 false,
-                                                                                null,
-                                                                                null);
+                                                                                1);
             }
                       
 
             return books.Select(_mapper.Map<Book, BookPreviewDto>)
                 .ToArray();            
         }
+
+        public async Task<int> GetBooksCountAsunc()
+        {
+            return await _unitOfWork.Books.CountAsync();
+        }
+
         public async Task<BookDto> GetOneBookInfoAsync(int id) 
         {
             return _mapper.Map<Book, BookDto>(await _unitOfWork.Books.FindAsync(id));

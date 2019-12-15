@@ -70,6 +70,10 @@ namespace PublishingHouse.Controllers
             var orders = (await _orderService.GetOrdersForUserAsync((
                                 await _userManager.GetUserAsync(HttpContext.User)).Id))
                                 .ToList();
+            foreach(var order in orders)
+            {
+                order.TotalSum = order.Books.Sum(b => b.Amount * b.Price);
+            }
             return View(orders);
         }
     }

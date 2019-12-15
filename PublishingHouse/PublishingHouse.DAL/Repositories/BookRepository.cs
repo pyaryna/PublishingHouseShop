@@ -27,8 +27,9 @@ namespace PublishingHouse.DAL.Repositories
                 .FirstOrDefaultAsync(d => d.Id == id);
         }
 
-        public async Task<IEnumerable<Book>> GetAllBooksAsync(int? authorId, int? categoryId, bool sortByPrice, bool ascending, int? skip, int? take)
+        public async Task<IEnumerable<Book>> GetAllBooksAsync(int? authorId, int? categoryId, bool sortByPrice, bool ascending, int page)
         {
+            var pageSize = 8;
             var books = GetBooksMainInfo();
 
             if (authorId.HasValue)
@@ -46,11 +47,7 @@ namespace PublishingHouse.DAL.Repositories
                 books = ascending ? books.OrderBy(b => b.Price) : books.OrderByDescending(b => b.Price);
             }
 
-            if (skip.HasValue && take.HasValue)
-            {
-                books = books.Skip(skip.Value)
-                .Take(take.Value);
-            }
+            books = books.Skip((page - 1) * pageSize).Take(pageSize);
 
             return await books.ToListAsync();
         }

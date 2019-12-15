@@ -40,11 +40,13 @@ namespace PublishingHouse.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
             PreviewDto preview = new PreviewDto();
-            preview.Books = await _bookService.GetAllBooksInfoAsync(null);
-            preview.Request = new BLL.Request.BookRequest();
+            var count = await _bookService.GetBooksCountAsunc();
+            var take = 8;
+            preview.Request = new BLL.Request.BookRequest(null, null, false, false, count, page, take);
+            preview.Books = await _bookService.GetAllBooksInfoAsync(preview);            
             preview.Categories = (await _categoryService.GetAllCategoriesAsync())
                 .Select(x => new SelectListItem
                 {
@@ -59,13 +61,19 @@ namespace PublishingHouse.Controllers
                     Value = x.Id.ToString(),
                     Selected = x.Id == preview.Request.AuthorId
                 });
-                return View(preview);
+            return View(preview);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(PreviewDto preview)
+        public async Task<IActionResult> Index(PreviewDto preview, int page = 1)
         {
-            if(preview.Sorting == 0)
+            var count = await _bookService.GetBooksCountAsunc();
+            var take = 8;
+            preview.Request = new BLL.Request.BookRequest(preview.Request.AuthorId,
+                                                preview.Request.CategoryId, 
+                                                preview.Request.SortByPrice, preview.Request.IsAscending, 
+                                                count, page, take);
+            if (preview.Sorting == 0)
             {
                 preview.Request.SortByPrice = false;
             }
