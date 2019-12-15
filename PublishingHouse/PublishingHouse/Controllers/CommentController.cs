@@ -38,27 +38,6 @@ namespace PublishingHouse.Controllers
             return View();
         }
 
-
-        //[HttpGet]
-        //public async Task<IActionResult> Update(int id)
-        //{
-        //    var book = await this.GetUpdateBookDto(_bookService, _authorService, _categoryService, id);
-        //    return View(book);
-        //}
-
-        //[HttpPost]
-        //public async Task<IActionResult> Update(UpdateBookDto updateBook)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var updatedBook = await _bookService.UpdateBookAsync(updateBook.Id, updateBook);
-        //        return RedirectToAction("Details", new { id = updatedBook.Id });
-        //    }
-
-        //    var book = await this.GetUpdateBookDto(_bookService, _authorService, _categoryService, updateBook.Id);
-        //    return View(book);
-        //}
-
         [HttpPost]
         public async Task<IActionResult> Delete(int id, int bookId)
         {

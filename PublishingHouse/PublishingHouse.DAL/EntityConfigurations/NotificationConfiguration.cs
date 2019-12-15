@@ -16,6 +16,9 @@ namespace PublishingHouse.DAL.EntityConfigurations
             builder.Property(n => n.Name)
                 .IsRequired();
 
+            builder.Property(n => n.Email)
+                .IsRequired();
+
             builder.Property(n => n.Subject)
                 .IsRequired();
 

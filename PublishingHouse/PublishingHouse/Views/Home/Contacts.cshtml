@@ -33,21 +33,24 @@
 <hr />
 <div>
     <h2 class="centered">Напишіть нам</h2>
-    <form>
+    <form asp-controller="home" asp-action="AddCallback">
         <div class="form-row">
             <div class="col form-group">
                 <input asp-for="Name" class="form-control m-2" placeholder="Ваше ім'я" />
                 <span asp-validation-for="Name" class="text-danger"></span>
                 <input asp-for="Email" class="form-control m-2" placeholder="Email" />
                 <span asp-validation-for="Email" class="text-danger"></span>
-                <input asp-for="Issue" class="form-control m-2" placeholder="Тема" />
-                <span asp-validation-for="Issue" class="text-danger"></span>
+                <input asp-for="Subject" class="form-control m-2" placeholder="Тема" />
+                <span asp-validation-for="Subject" class="text-danger"></span>
             </div>
             <div class="col form-group">
-                <textarea asp-for="Message" class="form-control m-2" placeholder="Повідомлення"></textarea>
-                <span asp-validation-for="Message" class="text-danger"></span>
+                <textarea asp-for="Text" class="form-control m-2" placeholder="Повідомлення"></textarea>
+                <span asp-validation-for="Text" class="text-danger"></span>
             </div>
         </div>
-        <button type="submit" class="btn btn-danger" id="send">Надіслати</button>
+        <button type="submit" class="btn btn-danger" id="send"
+                onclick="return alert('Ваше повідомлення успішно відправлено!')">
+            Надіслати
+        </button>
     </form>
 </div>

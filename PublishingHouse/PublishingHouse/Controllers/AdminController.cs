@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PublishingHouse.BLL.Interfaces;
@@ -9,24 +10,28 @@ using PublishingHouse.DAL.Entities;
 
 namespace PublishingHouse.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private IBookService _bookService;
         private IAuthorService _authorService;
         private ICategoryService _categoryService;
         private IOrderService _orderService;
+        private INotificationService _notificationService;
         private UserManager<Customer> _userManager;
 
         public AdminController(IBookService bookService, 
                                 IAuthorService authorService, 
                                 ICategoryService categoryService,
                                 IOrderService orderService,
+                                INotificationService notificationService,
                                 UserManager<Customer> userManager)
         {
             _bookService = bookService;
             _authorService = authorService;
             _categoryService = categoryService;
             _orderService = orderService;
+            _notificationService = notificationService;
             _userManager = userManager;
         }
 
@@ -66,10 +71,24 @@ namespace PublishingHouse.Controllers
         }
 
         [HttpGet]
-        public IActionResult Notices()
+        public async Task<IActionResult> Notices()
         {
-            var notices = _userManager.Users;
+            var notices = (await _notificationService.GetAllNotificationsInfoAsync()).ToList();
             return View(notices);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> NoticeDetails(int id)
+        {
+            var notice = await _notificationService.GetOneNotificationInfoAsync(id);
+            return View(notice);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteNotice(int id)
+        {
+            await _notificationService.RemoveNotificationByIdAsync(id);
+            return RedirectToAction("Notices", "admin");
         }
 
         [HttpPost]

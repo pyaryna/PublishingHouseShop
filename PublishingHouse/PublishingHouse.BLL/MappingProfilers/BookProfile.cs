@@ -19,7 +19,6 @@ namespace PublishingHouse.BLL.MappingProfilers
                 .ForMember(b => b.Authors, opt => opt.MapFrom(x => x.BookAuthors))
                 .ForMember(b => b.Categories, opt => opt.MapFrom(x => x.BookCategories))
                 .ForMember(b => b.Comments, opt => opt.MapFrom(x => x.Comments));
-            //.ReverseMap();
 
             CreateMap<AddBookDto, Book>()
                 .ForMember(b => b.Id, opt => opt.Ignore())

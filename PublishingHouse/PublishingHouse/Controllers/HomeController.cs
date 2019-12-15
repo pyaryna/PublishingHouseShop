@@ -19,6 +19,8 @@ namespace PublishingHouse.Controllers
         private IBookService _bookService;
         private IAuthorService _authorService;
         private ICategoryService _categoryService;
+        private INotificationService _notificationService;
+
         //private readonly ILogger<HomeController> _logger;
 
         //public HomeController(ILogger<HomeController> logger)
@@ -26,11 +28,15 @@ namespace PublishingHouse.Controllers
         //    _logger = logger;
         //}
 
-        public HomeController(IBookService bookService, IAuthorService authorService, ICategoryService categoryService)
+        public HomeController(IBookService bookService, 
+                                IAuthorService authorService, 
+                                ICategoryService categoryService,
+                                INotificationService notificationService)
         {
             _bookService = bookService;
             _authorService = authorService;
             _categoryService = categoryService;
+            _notificationService = notificationService;
         }
 
         [HttpGet]
@@ -98,10 +104,13 @@ namespace PublishingHouse.Controllers
         }
 
         [HttpPost]
-        public IActionResult Contacts(CallbackDto callbackDto)
+        public async Task<IActionResult> AddCallback(CallbackDto callback)
         {
-            
-
+            if (ModelState.IsValid)
+            {
+                await _notificationService.AddNotificationAsync(callback);
+                return View("Contacts");
+            }                        
             return View();
         }
 

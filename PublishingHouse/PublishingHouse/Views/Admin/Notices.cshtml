@@ -1,4 +1,6 @@
-﻿<div class="handler padding">
+﻿@model List<NotificationDto>
+
+<div class="handler padding">
     <ul class="list-inline">
         <li class="list-inline-item handler-item">
             <a asp-controller="Admin" asp-action="Books" class="btn">Книги</a>
@@ -19,4 +21,59 @@
             <a asp-controller="Admin" asp-action="Notices" class="btn">Повідомлення</a>
         </li>
     </ul>
+</div>
+<div>
+    <h2>Повідомлення</h2>
+    @if (Model.Any())
+    {
+        <form>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Ім'я</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Тема</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-controller="admin" asp-action="NoticeDetails" asp-route-id="@Model[i].Id">
+                                    @Model[i].Id
+                                </a>
+                            </td>
+                            <td>@Model[i].Name</td>
+                            <td>
+                               @Model[i].Email
+                            </td>
+                            <td>
+                                @Model[i].Subject
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <div>
+                                    <button type="submit" class="btn btn-danger m-1 form-submit"
+                                            asp-controller="admin" asp-action="DeleteNotice" asp-route-id="@Model[i].Id">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </form>
+    }
+    else
+    {
+        <p>
+            У Вас немає нових повідомлень.
+        </p>
+    }
 </div>
