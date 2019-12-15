@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PublishingHouse.DAL.Repositories
 {
-    public abstract class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class//, IIdentifiable<TKey>
+    public abstract class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class
     {
         protected readonly PublishingHouseContext Context;
 
@@ -39,12 +39,6 @@ namespace PublishingHouse.DAL.Repositories
             Context.Set<TEntity>()
                 .RemoveRange(items);
         }
-
-        //public virtual async Task<TEntity> FindAsync(TKey key)
-        //{
-        //    return await Context.Set<TEntity>()
-        //        .FirstOrDefaultAsync(x => x.Id.Equals(key));
-        //}
 
         public virtual async Task<IEnumerable<TEntity>> GetAsync() =>
             await Context.Set<TEntity>()

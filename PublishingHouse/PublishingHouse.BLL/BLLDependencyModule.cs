@@ -18,6 +18,7 @@ namespace PublishingHouse.BLL
             builder.RegisterType<CartService>().As<ICartService>();
             builder.RegisterType<CategoryService>().As<ICategoryService>();
             builder.RegisterType<CommentService>().As<ICommentService>();
+            builder.RegisterType<NotificationService>().As<INotificationService>();
             builder.RegisterType<OrderService>().As<IOrderService>();
 
             builder.RegisterModule<DALDependencyModule>();

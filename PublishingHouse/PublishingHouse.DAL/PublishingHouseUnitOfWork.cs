@@ -23,6 +23,7 @@ namespace PublishingHouse.DAL
             Carts = new CartRepository(_context);
             Categories = new CategoryRepository(_context);
             Comments = new CommentRepository(_context);
+            Notifications =  new NotificationRepository(_context);
             Orders = new OrderRepository(_context);           
         }
 
@@ -34,6 +35,7 @@ namespace PublishingHouse.DAL
         public ICartRepository Carts { get; }
         public ICategoryRepository Categories { get; }
         public ICommentRepository Comments { get; }
+        public INotificationRepository Notifications { get; }
         public IOrderRepository Orders { get; }
 
         public async Task CommitAsync()

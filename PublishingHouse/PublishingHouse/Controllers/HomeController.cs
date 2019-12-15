@@ -100,20 +100,7 @@ namespace PublishingHouse.Controllers
         [HttpPost]
         public IActionResult Contacts(CallbackDto callbackDto)
         {
-            var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("", callbackDto.Email));
-            message.Subject = callbackDto.Issue;
-            message.Body = new TextPart("Plain")
-            {
-                Text = callbackDto.Message
-            };
-            using (var client = new SmtpClient())
-            {
-                client.Connect("smtp.google.com", 25, false);
-                client.Send(message);
-
-                client.Disconnect(true);
-            }
+            
 
             return View();
         }

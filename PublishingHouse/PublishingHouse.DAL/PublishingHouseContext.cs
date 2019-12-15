@@ -18,6 +18,7 @@ namespace PublishingHouse.DAL
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -16,6 +16,7 @@ namespace PublishingHouse.DAL
         ICartRepository Carts { get; }        
         ICategoryRepository Categories { get; }
         ICommentRepository Comments { get; }
+        INotificationRepository Notifications { get; }
         IOrderRepository Orders { get; }
 
         Task CommitAsync();
