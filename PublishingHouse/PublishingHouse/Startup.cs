@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -41,14 +42,18 @@ namespace PublishingHouse
                 options => options.UseSqlServer(Configuration.GetConnectionString("PublishingHouseDb")));
 
             services.AddIdentity<Customer, IdentityRole>()
-                .AddEntityFrameworkStores<PublishingHouseContext>();
+                .AddEntityFrameworkStores<PublishingHouseContext>()
+                .AddDefaultTokenProviders();
 
             services.AddAuthentication()
+                //o =>
+                //{
+                //    o.DefaultScheme = GoogleDefaults.AuthenticationScheme;
+                //})
                 .AddGoogle(options =>
                 {
                     options.ClientId = "558382192487-pj1va0glu5o6tdjuovdn1knkj754ikdn.apps.googleusercontent.com";
                     options.ClientSecret = "_mtrXTztLD_x0Cvf6KpA32rK";
-                   // options.CallbackPath= ""
                 });
 
             services.AddControllersWithViews();

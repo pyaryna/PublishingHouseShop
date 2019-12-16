@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using PublishingHouse.BLL.DTOs;
 using PublishingHouse.BLL.Interfaces;
 using PublishingHouse.DAL.Entities;
 
@@ -36,10 +37,16 @@ namespace PublishingHouse.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Books()
+        public async Task<IActionResult> Books(int page = 1)
         {
-            var books = await _bookService.GetAllBooksInfoAsync(null);
-            return View(books);
+            PreviewDto preview = new PreviewDto();
+            var count = await _bookService.GetBooksCountAsunc();
+            var take = 8;
+            preview.Request = new BLL.Request.BookRequest(null, null, false, false, count, page, take);
+            preview.Books = await _bookService.GetAllBooksInfoAsync(preview);
+            return View(preview);
+            //var books = await _bookService.GetAllBooksInfoAsync(null);
+            //return View(books);
         }
 
         [HttpGet]

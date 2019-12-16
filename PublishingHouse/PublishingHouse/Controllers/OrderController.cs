@@ -33,6 +33,7 @@ namespace PublishingHouse.Controllers
             {
                 Carts = carts.ToList()
             };
+            order.TotalSum = carts.Sum(c => c.Amount * c.Book.Price);
             return View(order);
         }
 
