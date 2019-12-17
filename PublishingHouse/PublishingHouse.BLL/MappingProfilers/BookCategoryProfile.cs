@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PublishingHouse.BLL.MappingProfilers
 {
-    class BookCategoryProfile: Profile
+    public class BookCategoryProfile: Profile
     {
         public BookCategoryProfile()
         {

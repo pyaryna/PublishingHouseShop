@@ -39,11 +39,6 @@ namespace PublishingHouse.BLL.Services
 
             await _unitOfWork.CommitAsync();
         }
-
-        //public async Task<BookDto> UpdateBookAsync(int id, UpdateBookDto updateBook)
-        //{
-
-        //}
         public async Task RemoveCommentByIdAsync(int id)
         {
             var comment = await _unitOfWork.Comments.FindAsync(id);

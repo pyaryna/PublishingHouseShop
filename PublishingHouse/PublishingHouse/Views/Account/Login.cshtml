@@ -1,14 +1,12 @@
 ﻿@model LoginDto
-@using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
 
 @{
-    ViewBag.Title = "User Login";
+    ViewBag.Title = "Вхід";
 }
 
 <div class="row padding">
     <div class="col-md-6">
-        <h1>User Login</h1>
+        <h1>Вхід</h1>
         <form method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
@@ -46,8 +44,11 @@
             {
                 <form method="post" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl">
                     <div>
-                        <button type="submit" class="btn external-login" name="provider" value="@Model.ExternalLogins[0]">
+                        <button type="submit" class="btn external-login" name="provider" value="@Model.ExternalLogins[0].Name">
                             <img src="~/images/google.png" />
+                        </button>
+                        <button type="submit" class="btn external-login" name="provider" value="@Model.ExternalLogins[1].Name">
+                            <img src="~/images/facebook.png" />
                         </button>
                     </div>
                 </form>

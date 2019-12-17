@@ -18,14 +18,6 @@ namespace PublishingHouse.Controllers
         private IAuthorService _authorService;
         private ICategoryService _categoryService;
         private INotificationService _notificationService;
-
-        //private readonly ILogger<HomeController> _logger;
-
-        //public HomeController(ILogger<HomeController> logger)
-        //{
-        //    _logger = logger;
-        //}
-
         public HomeController(IBookService bookService, 
                                 IAuthorService authorService, 
                                 ICategoryService categoryService,

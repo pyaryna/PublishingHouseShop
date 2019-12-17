@@ -20,7 +20,6 @@ namespace PublishingHouse.BLL.DTOs
         [Display(Name = "Пароль")]
         public string Password { get; set; }
 
-       // [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Підтвердіть пароль")]
         [Compare("Password",

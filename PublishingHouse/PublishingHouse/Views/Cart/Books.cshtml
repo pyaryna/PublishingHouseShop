@@ -1,68 +1,72 @@
 ﻿@model List<CartDto>
 
-    <div>
-        <h2>Кошик</h2>
-        @if (Model.Any())
-        {
-            <form method="post">
-                <table class="table">
-                    <thead>
+@{
+    ViewBag.Title = "Кошик";
+}
+
+<div>
+    <h2>Кошик</h2>
+    @if (Model.Any())
+    {
+        <form method="post">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Назва</th>
+                        <th scope="col">Ціна</th>
+                        <th scope="col">Кількість</th>
+                        <th scope="col">Сума</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Назва</th>
-                            <th scope="col">Ціна</th>
-                            <th scope="col">Кількість</th>
-                            <th scope="col">Сума</th>
-                            <th scope="col"></th>
+                            <td><img src=@Model[i].Book.ImageUrl class="handler-img" asp-append-version="true" alt="book image" /></td>
+                            <td>@Model[i].Book.Title</td>
+                            <td>@Model[i].Book.Price</td>
+                            <td>
+                                <input hidden asp-for="@Model[i].Id" />
+                                <input hidden asp-for="@Model[i].Book.Id" />
+                                <input hidden asp-for="@Model[i].Book.ImageUrl" />
+                                <input hidden asp-for="@Model[i].Book.Title" />
+                                <input hidden asp-for="@Model[i].Book.Price" />
+                                <input asp-for="@Model[i].Amount" class="form-control" value="1" />
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <div>
+                                    <button type="submit" class="btn btn-danger m-1 form-submit"
+                                            asp-controller="Cart" asp-action="Delete" asp-route-id="@Model[i].Id">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+
+
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @for(int i = 0; i < Model.Count; i++)
-                        {                            
-                            <tr>
-                                <td><img src=@Model[i].Book.ImageUrl class="handler-img" asp-append-version="true" alt="book image" /></td>
-                                <td>@Model[i].Book.Title</td>
-                                <td>@Model[i].Book.Price</td>
-                                <td>
-                                    <input hidden asp-for="@Model[i].Id" />
-                                    <input hidden asp-for="@Model[i].Book.Id" />
-                                    <input hidden asp-for="@Model[i].Book.ImageUrl" />
-                                    <input hidden asp-for="@Model[i].Book.Title" />
-                                    <input hidden asp-for="@Model[i].Book.Price" />
-                                    <input asp-for="@Model[i].Amount" class="form-control" value="1"/>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                    <div>
-                                        <button type="submit" class="btn btn-danger m-1 form-submit"
-                                                asp-controller="Cart" asp-action="Delete" asp-route-id="@Model[i].Id">
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                    </div>
+                    }
 
+                </tbody>
+            </table>
 
-                                </td>
-                            </tr>
-                        }
+            <button asp-controller="order" asp-action="create" type="submit" class="btn btn-warning m-1">
+                Оформити замовлення
+            </button>
+        </form>
 
-                    </tbody>
-                </table>
-
-                <button asp-controller="order" asp-action="create" type="submit" class="btn btn-warning m-1">
-                    Оформити замовлення
-                </button>
-            </form>
-
-        }
-        else
-        {
-            <p>
-                Ваш Кошик поки порожній.
-            </p>
-            <a class="btn btn-danger" asp-controller="home" asp-action="index">
-                Почати покупки
-            </a>
-        }
-    </div>
+    }
+    else
+    {
+        <p>
+            Ваш Кошик поки порожній.
+        </p>
+        <a class="btn btn-danger" asp-controller="home" asp-action="index">
+            Почати покупки
+        </a>
+    }
+</div>
 

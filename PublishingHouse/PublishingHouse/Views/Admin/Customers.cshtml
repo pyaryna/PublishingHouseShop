@@ -1,28 +1,31 @@
 ﻿@model IEnumerable<Customer>
 
+@{
+    ViewBag.Title = "Користувачі";
+}
 
-    <div class="handler padding">
-        <ul class="list-inline">
-            <li class="list-inline-item handler-item">
-                <a asp-controller="Admin" asp-action="Books" class="btn">Книги</a>
-            </li>
-            <li class="list-inline-item handler-item">
-                <a asp-controller="Admin" asp-action="Authors" class="btn">Автори</a>
-            </li>
-            <li class="list-inline-item handler-item">
-                <a asp-controller="Admin" asp-action="Categories" class="btn">Категорії</a>
-            </li>
-            <li class="list-inline-item handler-item">
-                <a asp-controller="Admin" asp-action="Customers" class="btn">Покупці</a>
-            </li>
-            <li class="list-inline-item handler-item">
-                <a asp-controller="Admin" asp-action="Orders" class="btn">Замовлення</a>
-            </li>
-            <li class="list-inline-item handler-item">
-                <a asp-controller="Admin" asp-action="Notices" class="btn">Повідомлення</a>
-            </li>
-        </ul>
-    </div>
+<div class="handler padding">
+    <ul class="list-inline">
+        <li class="list-inline-item handler-item">
+            <a asp-controller="Admin" asp-action="Books" class="btn">Книги</a>
+        </li>
+        <li class="list-inline-item handler-item">
+            <a asp-controller="Admin" asp-action="Authors" class="btn">Автори</a>
+        </li>
+        <li class="list-inline-item handler-item">
+            <a asp-controller="Admin" asp-action="Categories" class="btn">Категорії</a>
+        </li>
+        <li class="list-inline-item handler-item">
+            <a asp-controller="Admin" asp-action="Customers" class="btn">Покупці</a>
+        </li>
+        <li class="list-inline-item handler-item">
+            <a asp-controller="Admin" asp-action="Orders" class="btn">Замовлення</a>
+        </li>
+        <li class="list-inline-item handler-item">
+            <a asp-controller="Admin" asp-action="Notices" class="btn">Повідомлення</a>
+        </li>
+    </ul>
+</div>
 <div>
     <h1>Користувачі</h1>
     @if (Model.Any())

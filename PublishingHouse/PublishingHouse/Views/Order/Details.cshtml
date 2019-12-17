@@ -1,69 +1,73 @@
 ﻿@model OrderDto
 @inject SignInManager<Customer> _signInManager;
 
-    <div class="container">
-        <h4 class="modal-title">Ваше замовлення</h4>
-        @if (Model.DeliverAddress != "самовивіз")
-        {
+@{
+    ViewBag.Title = "Деталі замовлення";
+}
 
-        }
-        else
-        {
-            <p>
-                Ім'я: @Model.Name<br>
-                Прізвище: @Model.Surname<br>
-                Номер телефону: @Model.Phone<br>
-                Доставка: @Model.Deliver<br>
-            </p>
-        }
+<div class="container">
+    <h4 class="modal-title">Ваше замовлення</h4>
+    @if (Model.DeliverAddress != "самовивіз")
+    {
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Назва</th>
-                    <th scope="col">Ціна</th>
-                    <th scope="col">Кількість</th>
-                    <th scope="col">Сума</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (int i = 0; i < Model.Books.Count; i++)
-                {
-                    <tr>
-                        <td><img src=@Model.Books[i].ImageUrl class="handler-img" asp-append-version="true" alt="book image" /></td>
-                        <td>@Model.Books[i].Title</td>
-                        <td>@Model.Books[i].Price</td>
-                        <td>
-                            @Model.Books[i].Amount
-                        </td>
-                        <td>
-                            @Model.Books[i].Price * @Model.Books[i].Amount
-                        </td>
-                    </tr>
-                }
-
-            </tbody>
-        </table>
-
-        <h2>Загальна сума:</h2>
+    }
+    else
+    {
         <p>
-            @Model.TotalSum
+            Ім'я: @Model.Name<br>
+            Прізвище: @Model.Surname<br>
+            Номер телефону: @Model.Phone<br>
+            Доставка: @Model.Deliver<br>
         </p>
+    }
 
-        <form asp-controller="Order" asp-action="Delete" asp-route-id="@Model.Id" method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Назва</th>
+                <th scope="col">Ціна</th>
+                <th scope="col">Кількість</th>
+                <th scope="col">Сума</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Books.Count; i++)
+            {
+                <tr>
+                    <td><img src=@Model.Books[i].ImageUrl class="handler-img" asp-append-version="true" alt="book image" /></td>
+                    <td>@Model.Books[i].Title</td>
+                    <td>@Model.Books[i].Price</td>
+                    <td>
+                        @Model.Books[i].Amount
+                    </td>
+                    <td>
+                        @Model.Books[i].Price * @Model.Books[i].Amount
+                    </td>
+                </tr>
+            }
 
-            <span id="confirmDeleteSpan_@Model.Id" style="display:none">
-                <span>Ви впевнені, що хочете видалити?</span>
-                <button type="submit" class="btn btn-danger m-1">Так</button>
-                <a href="#" class="btn btn-primary m-1"
-                   onclick="confirmDelete('@Model.Id', false)">Ні</a>
-            </span>
+        </tbody>
+    </table>
 
-            <span id="deleteSpan_@Model.Id">
-                <a href="#" class="btn btn-danger m-1"
-                   onclick="confirmDelete('@Model.Id', true)">Видалити</a>
-            </span>
-        </form>
+    <h2>Загальна сума:</h2>
+    <p>
+        @Model.TotalSum
+    </p>
 
-    </div>
+    <form asp-controller="Order" asp-action="Delete" asp-route-id="@Model.Id" method="post">
+
+        <span id="confirmDeleteSpan_@Model.Id" style="display:none">
+            <span>Ви впевнені, що хочете видалити?</span>
+            <button type="submit" class="btn btn-danger m-1">Так</button>
+            <a href="#" class="btn btn-primary m-1"
+               onclick="confirmDelete('@Model.Id', false)">Ні</a>
+        </span>
+
+        <span id="deleteSpan_@Model.Id">
+            <a href="#" class="btn btn-danger m-1"
+               onclick="confirmDelete('@Model.Id', true)">Видалити</a>
+        </span>
+    </form>
+
+</div>

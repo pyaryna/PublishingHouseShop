@@ -45,8 +45,6 @@ namespace PublishingHouse.Controllers
             preview.Request = new BLL.Request.BookRequest(null, null, false, false, count, page, take);
             preview.Books = await _bookService.GetAllBooksInfoAsync(preview);
             return View(preview);
-            //var books = await _bookService.GetAllBooksInfoAsync(null);
-            //return View(books);
         }
 
         [HttpGet]

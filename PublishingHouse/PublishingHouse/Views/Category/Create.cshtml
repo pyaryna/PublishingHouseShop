@@ -1,18 +1,21 @@
 ﻿@model AddCategoryDto
 
+@{
+    ViewBag.Title = "Створити категорію";
+}
 
-    <form enctype="multipart/form-data" asp-controller="Category" asp-action="Create" method="post" class="mt-3">
-        <div class="form-group row">
-            <label asp-for="Name" class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10">
-                <input asp-for="Name" class="form-control" placeholder="Name" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
+<form enctype="multipart/form-data" asp-controller="Category" asp-action="Create" method="post" class="mt-3">
+    <div class="form-group row">
+        <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Name" class="form-control" placeholder="Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
-        <div>
-            <button type="submit" class="btn btn-primary">
-                Create
-            </button>
-        </div>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">
+            Create
+        </button>
+    </div>
 
-    </form>
+</form>

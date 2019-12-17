@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PublishingHouse.BLL.MappingProfilers
 {
-    class AuthorProfile: Profile
+    public class AuthorProfile: Profile
     {
         public AuthorProfile()
         {

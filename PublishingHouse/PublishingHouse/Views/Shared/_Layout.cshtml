@@ -4,11 +4,11 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Видавництво "ПАІС"</title>
+    <title>@ViewBag.Title</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/site.css">
 
     <script src="https://kit.fontawesome.com/0256878591.js" crossorigin="anonymous"></script>
 
@@ -43,7 +43,7 @@
                         <a href="https://www.facebook.com/pais.com.ua/">Facebook</a>
                     </p>
                 </div>
-                <div class="col-lg-3 address-div">
+                <div class="col-lg-3 login-div">
                     @if (_signInManager.IsSignedIn(User))
                     {
                         <form method="post" asp-action="logout" asp-controller="account">
@@ -87,6 +87,21 @@
                         </li>
                         <li class="nav-item">
                             <a asp-controller="Home" asp-action="Contacts" class="nav-link">Контакти</a>
+                        </li>
+                        <li class="nav-item login-li">
+                            @if (_signInManager.IsSignedIn(User))
+                            {
+                                <form method="post" asp-action="logout" asp-controller="account">
+                                    <button type="submit" class="nav-link btn btn-link py-0">
+                                        Вийти @User.Identity.Name
+                                    </button>
+                                </form>
+                            }
+                            else
+                            {
+                                <a asp-action="register" asp-controller="account">Зареєструватися</a><br>
+                                <a asp-action="login" asp-controller="account">Увійти</a>
+                            }
                         </li>
                     </ul>
                     @if (_signInManager.IsSignedIn(User) && !User.IsInRole("Admin"))

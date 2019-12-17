@@ -1,6 +1,10 @@
 ﻿@model BookDto
 @inject SignInManager<Customer> _signInManager;
 
+@{
+    ViewBag.Title = "Деталі книги";
+}
+
 <div class="container book-details">
     <h4 class="modal-title">@Model.Title</h4>
     <img src=@Model.ImageUrl class="padding book-image" alt="book image" asp-append-version="true" />
@@ -86,7 +90,7 @@
         {
             <div class="card mb-3 mt-3">
                 <div class="card-header">
-                    @comment.Customer.UserName
+                    @comment.Customer.Name
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">@comment.Text</h5>
@@ -97,8 +101,8 @@
                 @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                 {
                     <div class="card-footer">
-                        <form asp-controller="Comment" asp-action="Delete" 
-                              asp-route-id="@comment.Id" asp-route-bookId="@Model.Id" 
+                        <form asp-controller="Comment" asp-action="Delete"
+                              asp-route-id="@comment.Id" asp-route-bookId="@Model.Id"
                               method="post">
                             <span id="confirmDeleteSpan_@comment.Id" style="display:none">
                                 <span>Ви впевнені, що хочете видалити?</span>

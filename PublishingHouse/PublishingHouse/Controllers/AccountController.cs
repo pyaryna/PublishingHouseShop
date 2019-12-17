@@ -71,6 +71,8 @@ namespace PublishingHouse.Controllers
             return View(model);
         }
 
+        
+
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginDto model, string returnUrl)
@@ -107,7 +109,7 @@ namespace PublishingHouse.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        [AllowAnonymous]        
         public IActionResult ExternalLogin(string provider, string returnUrl)
         {
             var redirectUrl = Url.Action("ExternalLoginCallback", "Account",
@@ -138,7 +140,6 @@ namespace PublishingHouse.Controllers
                 return View("Login", loginViewModel);
             }
 
-            // Get the login information about the user from the external login provider
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
@@ -147,9 +148,7 @@ namespace PublishingHouse.Controllers
 
                 return View("Login", loginViewModel);
             }
-
-            // If the user already has a login (i.e if there is a record in AspNetUserLogins
-            // table) then sign-in the user with this external login provider
+            
             var signInResult = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider,
                 info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
 
@@ -157,16 +156,12 @@ namespace PublishingHouse.Controllers
             {
                 return LocalRedirect(returnUrl);
             }
-            // If there is no record in AspNetUserLogins table, the user may not have
-            // a local account
             else
             {
-                // Get the email claim value
                 var email = info.Principal.FindFirstValue(ClaimTypes.Email);
 
                 if (email != null)
                 {
-                    // Create a new user without password if we do not have a user already
                     var user = await _userManager.FindByEmailAsync(email);
 
                     if (user == null)
@@ -180,14 +175,12 @@ namespace PublishingHouse.Controllers
                         await _userManager.CreateAsync(user);
                     }
 
-                    // Add a login (i.e insert a row for the user in AspNetUserLogins table)
                     await _userManager.AddLoginAsync(user, info);
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
                     return LocalRedirect(returnUrl);
                 }
 
-                // If we cannot find the user email we cannot continue
                 ViewBag.ErrorTitle = $"Email claim not received from: {info.LoginProvider}";
                 ViewBag.ErrorMessage = "Please contact support on Pragim@PragimTech.com";
 

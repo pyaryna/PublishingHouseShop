@@ -25,12 +25,10 @@ namespace PublishingHouse
 {
     public class Startup
     {
-        public Startup()
+        public Startup(IConfiguration configuration)
         {
-            var configuration = new ConfigurationBuilder();
-            configuration.AddJsonFile("appsettings.json", false, true);
-            Configuration = configuration.Build();
-        }
+            Configuration = configuration;
+        }        
 
         public IConfiguration Configuration { get; }
         public ILifetimeScope AutofacContainer { get; private set; }
@@ -42,23 +40,31 @@ namespace PublishingHouse
                 options => options.UseSqlServer(Configuration.GetConnectionString("PublishingHouseDb")));
 
             services.AddIdentity<Customer, IdentityRole>()
-                .AddEntityFrameworkStores<PublishingHouseContext>()
-                .AddDefaultTokenProviders();
+                .AddEntityFrameworkStores<PublishingHouseContext>();
 
             services.AddAuthentication()
-                //o =>
-                //{
-                //    o.DefaultScheme = GoogleDefaults.AuthenticationScheme;
-                //})
                 .AddGoogle(options =>
                 {
-                    options.ClientId = "558382192487-pj1va0glu5o6tdjuovdn1knkj754ikdn.apps.googleusercontent.com";
-                    options.ClientSecret = "_mtrXTztLD_x0Cvf6KpA32rK";
+                    options.ClientId = Configuration["Authentication:Google:ClientId"];
+                    options.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+                })
+                .AddFacebook(options =>
+                {
+                    options.ClientId = Configuration["Authentication:Facebook:AppId"];
+                    options.ClientSecret = Configuration["Authentication:Facebook:AppSecret"];
                 });
 
             services.AddControllersWithViews();
 
-            services.AddAutoMapper(typeof(BookProfile).Assembly);          
+            services.AddAutoMapper(typeof(AuthorProfile).Assembly);
+            services.AddAutoMapper(typeof(BookProfile).Assembly);
+            services.AddAutoMapper(typeof(BookCategoryProfile).Assembly);
+            services.AddAutoMapper(typeof(BookOrderProfile).Assembly);
+            services.AddAutoMapper(typeof(BookProfile).Assembly);
+            services.AddAutoMapper(typeof(CartProfile).Assembly);
+            services.AddAutoMapper(typeof(CommentProfile).Assembly);
+            services.AddAutoMapper(typeof(NotificationProvider).Assembly);
+            services.AddAutoMapper(typeof(OrderProfile).Assembly);
 
             var builder = new ContainerBuilder();
             builder.Populate(services);
@@ -79,12 +85,10 @@ namespace PublishingHouse
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseExceptionHandler("/Home/Error");              
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
-            //app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseRouting();

@@ -1,5 +1,9 @@
 ﻿@model AddOrderDto
 
+@{
+    ViewBag.Title = "Оформлення";
+}
+
 <div>
     <h2>Замовлення</h2>
 
@@ -14,7 +18,7 @@
                 </tr>
             </thead>
             <tbody>
-                @for(int i = 0; i < Model.Carts.Count; i++)
+                @for (int i = 0; i < Model.Carts.Count; i++)
                 {
                     <tr>
                         <input hidden asp-for="@Model.Carts[i].Id" />
@@ -66,7 +70,7 @@
         </div>
         <div class="form-group row" style="display:none" id="deliverAddress">
             <label asp-for="DeliverAddress" class="col-sm-2 col-form-label"></label>
-            <input asp-for="DeliverAddress" class="form-control" placeholder="Адреса доставки" value="самовивіз"/>
+            <input asp-for="DeliverAddress" class="form-control" placeholder="Адреса доставки" value="самовивіз" />
         </div>
 
         <a class="btn btn-warning m-1" asp-controller="Cart" asp-action="Books">
@@ -77,6 +81,6 @@
             Завершити оформлення
         </button>
     </form>
-    
+
 </div>
 

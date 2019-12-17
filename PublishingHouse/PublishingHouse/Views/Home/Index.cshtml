@@ -1,6 +1,10 @@
 ﻿@model PreviewDto
 @inject SignInManager<Customer> _signInManager;
 
+@{
+    ViewBag.Title = "Видавництво \"Паіс\"";
+}
+
 <div class="padding">
     <form asp-controller="Home" asp-action="Index" method="post">
         <ul class="list-inline">
@@ -31,7 +35,7 @@
                     Виконати
                 </button>
             </li>
-        </ul>     
+        </ul>
     </form>
 </div>
 
@@ -60,7 +64,7 @@
                                     <i class="fas fa-shopping-cart"></i>
                                 </button>
                             </form>
-                        }                        
+                        }
                         @if (_signInManager.IsSignedIn(User) && !User.IsInRole("Admin"))
                         {
                             <form asp-controller="Cart" asp-action="Add" asp-route-bookId="@book.Id" method="post">

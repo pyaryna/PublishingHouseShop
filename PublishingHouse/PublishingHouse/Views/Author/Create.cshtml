@@ -1,5 +1,9 @@
 ﻿@model AddAuthorDto
 
+@{
+    ViewBag.Title = "Створити автора";
+}
+
 <form enctype="multipart/form-data" asp-controller="Author" asp-action="Create" method="post" class="mt-3">
     <div class="form-group row">
         <label asp-for="Name" class="col-sm-2 col-form-label"></label>

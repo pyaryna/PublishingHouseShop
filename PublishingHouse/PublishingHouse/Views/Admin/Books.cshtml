@@ -1,6 +1,8 @@
-﻿@*@model IEnumerable<BookPreviewDto>*@
-@model PreviewDto
+﻿@model PreviewDto
 
+@{
+    ViewBag.Title = "Книги";
+}
 
 <div class="handler padding">
     <ul class="list-inline">
@@ -44,7 +46,11 @@
                 @foreach (var book in Model.Books)
                 {
                     <tr>
-                        <th>@book.Id</th>
+                        <th>
+                            <a asp-controller="book" asp-action="details" asp-route-id="@book.Id">
+                                @book.Id
+                            </a>
+                        </th>
                         <td><img src=@book.ImageUrl class="handler-img" asp-append-version="true" alt="book image" /></td>
                         <td>@book.Title</td>
                         <td>@book.Price</td>
