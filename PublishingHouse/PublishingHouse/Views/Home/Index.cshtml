@@ -1,8 +1,124 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model PreviewDto
+@inject SignInManager<Customer> _signInManager;
+
+@{
+    ViewBag.Title = "Видавництво \"Паіс\"";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="padding">
+    <form asp-controller="Home" asp-action="Index" method="post">
+        <ul class="list-inline">
+            <li class="list-inline-item request-item">
+                <div class="form-group">
+                    <label asp-for="@Model.Sorting" class="centered">Ціна</label>
+                    <select asp-for="@Model.Sorting" class="form-control">
+                        <option value="0">не сортувати</option>
+                        <option value="1">по зростанню</option>
+                        <option value="2">по спаданню</option>
+                    </select>
+                </div>
+            </li>
+            <li class="list-inline-item request-item">
+                <div class="form-group">
+                    <label asp-for="@Model.Request.AuthorId" class="centered">Автор</label>
+                    @Html.DropDownListFor(x => x.Request.AuthorId, Model.Authors, "Автор", new { @id = "chooseAuthor", @class = "form-control" })
+                </div>
+            </li>
+            <li class="list-inline-item request-item">
+                <div class="form-group">
+                    <label asp-for="@Model.Request.CategoryId" class="centered">Категорія</label>
+                    @Html.DropDownListFor(x => x.Request.CategoryId, Model.Categories, "Категорія", new { @id = "chooseCategory", @class = "form-control" })
+                </div>
+            </li>
+            <li class="ml-auto">
+                <button type="submit" class="btn btn-danger">
+                    Виконати
+                </button>
+            </li>
+        </ul>
+    </form>
+</div>
+
+<div>
+    <div class="row padding">
+        @foreach (var book in Model.Books)
+        {
+            <div class="col-md-3 padding">
+                <div class="card">
+                    <div class="card-header">
+                        <a asp-controller="Book" asp-action="Details" asp-route-id="@book.Id">
+                            <img src=@book.ImageUrl class="card-img-top" asp-append-version="true" alt="book image" />
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a asp-controller="Book" asp-action="Details" asp-route-id="@book.Id">@book.Title</a>
+                        </h4>
+                        <p class="card-text">@book.Price грн</p>
+                    </div>
+                    <div class="card-footer">
+                        @if (!_signInManager.IsSignedIn(User))
+                        {
+                            <form asp-controller="Cart" asp-action="Add" asp-route-bookId="@book.Id" method="post">
+                                <button type="submit" class="btn btn-danger m-1">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </form>
+                        }
+                        @if (_signInManager.IsSignedIn(User) && !User.IsInRole("Admin"))
+                        {
+                            <form asp-controller="Cart" asp-action="Add" asp-route-bookId="@book.Id" method="post">
+                                <button type="submit" class="btn btn-danger m-1"
+                                        onclick="return alert('Книга: @book.Title додана у кошик')">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </form>
+                        }
+
+                        @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <form asp-controller="Book" asp-action="Delete" asp-route-id="@book.Id" method="post">
+
+                                <a class="btn btn-warning m-1" asp-controller="Book" asp-action="Update" asp-route-id="@book.Id">
+                                    Редагувати
+                                </a>
+                                <button type="submit" class="btn btn-danger m-1"
+                                        onclick="return confirm('Ви впевнені, що хочете видалити книгу: @book.Title?')">
+                                    Видалити
+                                </button>
+
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <nav aria-label="Page navigation" id="pagination-nav">
+        <ul class="pagination">
+            @if (Model.Request.HasPreviousPage)
+            {
+                <li class="padding mr-auto">
+                    <a asp-action="Index"
+                       asp-route-page="@(Model.Request.PageNumber - 1)"
+                       class="btn btn-outline-danger">
+                        <span>&laquo;</span>
+                        Попередня
+                    </a>
+                </li>
+
+            }
+            @if (Model.Request.HasNextPage)
+            {
+                <li class="padding ml-auto">
+                    <a asp-action="Index"
+                       asp-route-page="@(Model.Request.PageNumber + 1)"
+                       class="btn btn-outline-danger">
+                        <span>&raquo;</span>
+                        Наступна
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
 </div>

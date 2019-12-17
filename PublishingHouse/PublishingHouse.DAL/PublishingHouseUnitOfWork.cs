@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PublishingHouse.DAL
 {
-    class PublishingHouseUnitOfWork: IPublishingHouseUnitOfWork
+    public class PublishingHouseUnitOfWork: IPublishingHouseUnitOfWork
     {
         private readonly PublishingHouseContext _context;
 
@@ -20,8 +20,10 @@ namespace PublishingHouse.DAL
             BookCategories = new BookCategoryRepository(_context);
             BookOrders = new BookOrderRepository(_context);
             Books = new BookRepository(_context);
+            Carts = new CartRepository(_context);
             Categories = new CategoryRepository(_context);
             Comments = new CommentRepository(_context);
+            Notifications =  new NotificationRepository(_context);
             Orders = new OrderRepository(_context);           
         }
 
@@ -30,8 +32,10 @@ namespace PublishingHouse.DAL
         public IBookCategoryRepository BookCategories { get; }
         public IBookOrderRepository BookOrders { get; }
         public IBookRepository Books { get; }
+        public ICartRepository Carts { get; }
         public ICategoryRepository Categories { get; }
         public ICommentRepository Comments { get; }
+        public INotificationRepository Notifications { get; }
         public IOrderRepository Orders { get; }
 
         public async Task CommitAsync()

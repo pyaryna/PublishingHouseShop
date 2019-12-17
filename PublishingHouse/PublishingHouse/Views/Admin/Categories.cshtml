@@ -1,0 +1,69 @@
+﻿@model IEnumerable<CategoryDto>
+
+@{
+    ViewBag.Title = "Категорії";
+}
+
+<div class="handler padding">
+    <ul class="list-inline">
+        <li class="list-inline-item handler-item">
+            <a asp-controller="Admin" asp-action="Books" class="btn">Книги</a>
+        </li>
+        <li class="list-inline-item handler-item">
+            <a asp-controller="Admin" asp-action="Authors" class="btn">Автори</a>
+        </li>
+        <li class="list-inline-item handler-item">
+            <a asp-controller="Admin" asp-action="Categories" class="btn">Категорії</a>
+        </li>
+        <li class="list-inline-item handler-item">
+            <a asp-controller="Admin" asp-action="Customers" class="btn">Покупці</a>
+        </li>
+        <li class="list-inline-item handler-item">
+            <a asp-controller="Admin" asp-action="Orders" class="btn">Замовлення</a>
+        </li>
+        <li class="list-inline-item handler-item">
+            <a asp-controller="Admin" asp-action="Notices" class="btn">Повідомлення</a>
+        </li>
+    </ul>
+</div>
+<div>
+    <h1>Категорії</h1>
+    <a class="btn btn-danger mb-3" asp-action="Create"
+       asp-controller="category">Додати нову категорію</a>
+    @if (Model.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Категорія</th>
+                    <th scope="col">Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var category in Model)
+                {
+                    <tr>
+                        <th>@category.Id</th>
+                        <td>@category.Name</td>
+                        <td>
+                            <form asp-controller="Category" asp-action="Delete" asp-route-id="@category.Id" method="post">
+                                <button type="submit" class="btn btn-danger m-1"
+                                        onclick="return confirm('Ви впевнені, що хочете видалити категорію: @category.Name?')">
+                                    Видалити
+                                </button>
+
+                            </form>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    }
+    else
+    {
+        <p>You have no books yet.</p>
+    }
+</div>

@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace PublishingHouse.DAL.Interfaces.Repositories
 {
-    public interface IRepository<TEntity, in TKey> where TEntity : class//, IIdentifiable<TKey>
+    public interface IRepository<TEntity, in TKey> where TEntity : class
     {
-        Task<TEntity> FindAsync(TKey key);
-
         Task<IEnumerable<TEntity>> GetAsync();
 
         TEntity Add(TEntity item);

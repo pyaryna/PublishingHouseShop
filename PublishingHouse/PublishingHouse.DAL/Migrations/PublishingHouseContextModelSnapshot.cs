@@ -15,7 +15,7 @@ namespace PublishingHouse.DAL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.1")
+                .HasAnnotation("ProductVersion", "3.1.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -68,71 +68,6 @@ namespace PublishingHouse.DAL.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -342,6 +277,9 @@ namespace PublishingHouse.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Language")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -370,6 +308,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "м'яка",
                             Description = "Це остання прижиттєва книга останнього Президента Чехословаччини і першого Президента Чеської Республіки Вацлава Гавела, світла особа якого досі асоціюється у багатьох людей з уособленням честі, обов’язку і беззаперечного морального авторитету. Своєрідний белетризований підсумок власного життя автор подає у надзвичайно оригінальній оправі колажу, у якому природно переплелися спогади, роздуми, допити-інтерв’ю із самим собою, фрагменти особистих щоденників та службових записок. Це, по суті, дуже густий і пізнавальний «концентрат» знакових подій, рішень та дій недалекого минулого за участі багатьох непересічних персонажів. Переконані, що ця книга, вперше видана українською мовою, здатна стати настільним підручником-настановою для вітчизняних державотворців та фахівців-гуманітаріїв, а також – вагомою підмогою для всіх, хто намагається збагнути сутність політичних процесів сучасності.",
                             Format = "70х100/16 ",
+                            ImageUrl = "~/images/Gavel_.png",
                             Language = "українська",
                             PagesAmount = 288,
                             Price = 130,
@@ -382,6 +321,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "тверда",
                             Description = "Пропонована авторським колективом книга про пригоди й перипетії студентів у третьому трудовому семестрі – це щирі і відверті спогади, роздуми і зізнання учасників студзагонівського руху про роки своєї молодості і дивовижний світ Сибіру, Казахстану, Далекого Сходу та Крайньої Півночі. Їх романтика поєднувалась із прагматизмом. Студенти самоорганізовувались, мандрували у незвідані краї, адаптовувались до місцевих реалій, закохувались, одружувались і щиро вірили у перспективу завтрашнього дня. Книга написана у доступному стилі і розрахована на якнайширшу аудиторію.",
                             Format = "60х90/16",
+                            ImageUrl = "~/images/Studzagony_.png",
                             Language = "українська",
                             PagesAmount = 288,
                             Price = 100,
@@ -394,6 +334,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "тверда",
                             Description = "Франция, Долина Замков. Из таинственного дома на холме «Medmor» исчезает знаменитая писательница, автор исторических романов Гаэлль Вильнёв. Ее имя известно всей Европе: она занимает первые строчки в рейтинге популярных писателей- романистов. Дело берут под свой контроль префект департамента и лично министр внутренних дел Франции. Являясь близким другом Гаэлль, к расследованию подключается бывший комиссар национальной полиции департамента Лютгард Аллар. Основная версия – похищение. Но от похитителей не поступает никаких требований. Одновременно с этим начинают происходить необъяснимые мистические события, связанные с теми, что свершались более трехсот лет назад, когда еще были сильны Инквизиция и Святой Трибунал. Противостояние тайных религиозных орденов, одержимость демонами и экзорцизм, странная община деревни Крессо и, конечно же, дом на холме «Medmor» – символ сатанизма и пристанище чернокнижников. С этим придется столкнуться Лютгарду Аллару и его бывшему подчиненному, а ныне комиссару полиции Ренальду Рою. Ошеломительный финал книги никого не оставит равнодушным…",
                             Format = "60х90/16",
+                            ImageUrl = "~/images/Bezuglyy_.png",
                             Language = "російська",
                             PagesAmount = 712,
                             Price = 150,
@@ -406,6 +347,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "тверда",
                             Description = "Действия первой книги серии \"Граф Воронцов\" разворачиваются в лихие 90‐е, сразу же после развала СССР. Главный герой романа Данила Воронцов приходится потомком знаменитому графу и светлейшему князю, генерал‐фельдмаршалу и герою войны 1812‐го года Михаилу Семеновичу Воронцову. В погоне за легкой наживой он вместе со своими друзьями оказывается втянут в сомнительную криминальную историю, связанную с кражей одной вещи, которая неожиданно для них представляет огромную ценность для криминальных авторитетов и руководства города и области. Завладев этой вещью, герои книги сталкиваются с начавшейся войной между уголовными авторитетами и криминальными разборками. Они скрываются от преследования бандитов и уголовного розыска, а их авантюрные приключения насыщены комедийными и одновременно с этим жестокими событиями, характеризующими период времени начала 90‐х годов. Книга \"Отдых по пятницам\" ‐ это горячая смесь авантюрно‐приключенческого, криминального и детективного жанров современной литературы. Читая ее, словно погружаешься в динамичный сюжет сериала или кинофильма, с желанием досмотреть его до конца сразу же…",
                             Format = "60х84/16",
+                            ImageUrl = "~/images/Bezuglyy_2.png",
                             Language = "російська",
                             PagesAmount = 368,
                             Price = 90,
@@ -418,6 +360,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "тверда",
                             Description = "Історико-пригодницький роман «Таємниця Святоюрської гори» оповідає про події в Галичині під час її окупації російськими військами в період Першої світової війни (вересень 1914 – червень 1915 рр.). Спроби російської контррозвідки запровадити в шпигунську мережу австрійців капітана Бєлінського виявляють таємницю, яку ретельно приховують уніатські ченці в надрах Святоюрської гори. Читач познайомиться з атмосферою, що панувала в дні важких випробувань в багатонаціональному місті, багатьма історичними особистостями, які опинилися в той час у Львові, діяльністю російської адміністрації, що намагалася перетворити Галицький край в нові губернії Росії. В основу книги лягли матеріали з фондів російських та українських держархівів і бібліотек, а також спогади учасників описуваних подій.",
                             Format = "60х90/16",
+                            ImageUrl = "~/images/Bogdanovich_.png",
                             Language = "українська",
                             PagesAmount = 348,
                             Price = 110,
@@ -430,6 +373,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "тверда",
                             Description = "Друга частина роману-дилогії «Таємниця Святоюрської гори» є самостійним цілісним твором і водночас продовженням першої частини. У попередній книзі події розгортаються у столиці Галичини в роки Першої світової війни, а друга книга занурює читача у вир Другої світової війни. Головний герой – російський офіцер царської армії, тричі відвідує Львів та щоразу застає місто в іншому державному підпорядкуванні – австрійському, польському та радянському. Художнє відтворення колоритного життя поліетнічної спільноти міста у драматичні та трагічні періоди його історії – це авторський задум. О. Богданович сповна його реалізував, спираючись на свідчення очевидців та їхні особисті архіви. Книга розрахована на широке коло читачів, передусім – шанувальників історико - пригодницького жанру, а також тих, хто цікавиться шпигунсько - контррозвідувальною тематикою, захоплюється історією Львова та прагне до глибокого її пізнання через виразне художнє слово.",
                             Format = "60х90/16",
+                            ImageUrl = "~/images/Bogdanovich_2.png",
                             Language = "українська",
                             PagesAmount = 156,
                             Price = 90,
@@ -442,6 +386,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "м’яка ",
                             Description = "Автор цієї книжки намагається зрозуміти суперечливу постать гетьмана Павла Скоропадського, порівнюючи його не з тогочасними українськими політиками, а з товаришами по службі: Карлом Густавом Маннергеймом та Петром Врангелем. Ці генерали-кавалеристи належали до свити останнього російського імператора і добре знали одне одного. До 1917 року їхні кар’єри розвивалися дуже схоже. Після розвалу Російської імперії вони почали на її уламках створювати нові держави. Впоратися із цим завданням пощастило лише Маннергейму.",
                             Format = "60х84/8",
+                            ImageUrl = "~/images/Shurhalo_2_.png",
                             Language = "українська",
                             PagesAmount = 224,
                             Price = 50,
@@ -454,6 +399,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "м’яка ",
                             Description = "Чому кавалеристи не знали, що танк марно рубати шаблею? Де насправді відбулася найбільша танкова битва? Скільки чорнозему вивезли німці з окупованих територій?.. У цій книжці спростовуються поширені уявлення про війну 1939-1945 років, які насправді не відповідають дійсності, розповідається про те, як ці міфи з’явились і яким є їхнє реальне підґрунтя.",
                             Format = "60х84/8",
+                            ImageUrl = "~/images/Shurhalo_.png",
                             Language = "українська",
                             PagesAmount = 140,
                             Price = 40,
@@ -466,6 +412,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "м'яка",
                             Description = "Авторські казкові історії про пригоди равлика Капучіно призначені для дітей дошкільного віку і покликані розвивати їх творче мислення та уяву. Переконані, що короткочасне повернення у казковий світ буде приємним та захопливим також і для їхніх батьків.",
                             Format = "70х84/16",
+                            ImageUrl = "~/images/ravlik.jpg",
                             Language = "українська",
                             PagesAmount = 24,
                             Price = 30,
@@ -478,6 +425,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "тверда",
                             Description = "Як відомо, шпак – це невеличкий птах ряду горобцеподібних, який завдяки своїй здатності до багатоголосся нерідко передражнює інших пернатих, а деколи навіть і людей. Недарма ж українська версія його назви походить від праслов'янського \"ščьpakъ\", яке, своєю чергою, утворилося від дієслова \"ščipati\" – \"щипати\", вжитого у значенні \"дражнити\", \"імітувати\". Звісно, нічого страшного, якщо цей халамидник сидить на дереві і знущається зі своїх жертв дистанційно, але як бути, коли голосистий шибеник оселяється у чиїйсь голові? Перед вами збірка історій людей, про яких так і кажуть: \"має шпака\". Вони – поряд: ходять тими самими вулицями, їздять у маршрутках, метро чи електричках, сидять за сусідніми столиками у кнайпах. Однак дуже часто ми навіть не здогадуємося, що в головах цих людей виводить трелі Sturnus vulgaris.",
                             Format = "70х100/32",
+                            ImageUrl = "~/images/Lozynskyy_.png",
                             Language = "українська",
                             PagesAmount = 120,
                             Price = 60,
@@ -490,6 +438,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "м'яка",
                             Description = "Вашій увазі пропонуємо книжку, що є результатом дослідження життєвого шляху непересічної особистості, перекладачки і фольклористки Ольги Рошкевич-Озаркевич, її стосунків з Іваном Франком на основі листування. В молоді роки їх поєднувало взаємне перше палке кохання, яке надихало поета на створення ліричних поезій. Проте закоханим не судилось бути разом. Читач дізнається маловідомі факти з життя Ольги та родини Рошкевичів, її чоловіка Володимира Озаркевича, Івана Франка і його соратників – Михайла та Анни Павликів. Рекомендуємо до прочитання дослідникам і шанувальникам творчості Івана Франка.",
                             Format = "60х84/16",
+                            ImageUrl = "~/images/Kostenko_.png",
                             Language = "українська",
                             PagesAmount = 164,
                             Price = 90,
@@ -502,6 +451,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "м’яка",
                             Description = "У цій книжечці зібрано рядки про кохання, написані українськими поетами різних часів. Вони засвідчують глибинну народну мудрість, довершеність і красу української мови. Метою цієї книжечки є утвердження верховенства любові.",
                             Format = "60х84/32",
+                            ImageUrl = "~/images/Struny_.png",
                             Language = "українська",
                             PagesAmount = 208,
                             Price = 30,
@@ -514,6 +464,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "тверда ",
                             Description = "Дана книга – унікальне в поліграфії видання – є підсумком копіткої багаторічної праці, започаткованої ще наприкінці 60-х років минулого століття. Книга, яка, власне, успішно витримала вже два видання у 2004 і 2008 роках, узагальнює і суттєво розширює «досвід» попередниць у кількості процитованих висловів, представлених авторів та «навігації» тематичного, алфавітного і географічного покажчиків. Всього у пропонованій Енциклопедії зібрано понад 19 200 афоризмів, крилатих фраз, цитат і висловів 3 300 авторів – про природу творчості, про майстерність журналіста, про ЗМІ та свободу слова, про зв’язки журналістики з іншими сферами буття тощо.",
                             Format = "60х84/8",
+                            ImageUrl = "~/images/2011Encyclopedia_.png",
                             Language = "українська",
                             PagesAmount = 960,
                             Price = 280,
@@ -526,6 +477,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "тверда",
                             Description = "Посібник містить основні положення курсу \"Практичної стилістики української мови\", який вивчають студенти факультету журналістики. Книга охоплює всі розділи цього курсу: в ній висвітлено особливості стилістичного використання в мові ЗМІ лексичних, фразеологічних, морфологічних і синтаксичних засобів. Сформульовано питання для самоперевірки і перелік завдань.",
                             Format = "60х84/16",
+                            ImageUrl = "~/images/kapeluh_.png",
                             Language = "українська",
                             PagesAmount = 400,
                             Price = 70,
@@ -538,6 +490,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "тверда ",
                             Description = "У посібнику викладено основні теоретичні положення курсу «Редагування в ЗМІ». До кожної теми подано також питання для самоперевірки, практичні завдання і рекомендовану літературу. Навчальним посібником можуть скористатися не тільки студенти факультету журналістики, для яких його, власне, й призначено, але й журналісти - практики, а також працівники всіх сфер діяльності, чия робота пов’язана з редагуванням і саморедагуванням.",
                             Format = "70х100/16",
+                            ImageUrl = "~/images/Kapeluh_zmi_.png",
                             Language = "українська",
                             PagesAmount = 432,
                             Price = 80,
@@ -550,6 +503,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "тверда",
                             Description = "У посібнику висвітлено специфіку праці журналістів у прямому ефірі. Книга, зокрема, охоплює особливості стилістичного використання в мовленні працівників телебачення лексичних, фразеологічних, морфологічних і синтаксичних засобів, дає рекомендації для глибшого засвоєння норм акцентології. Подано питання для самоперевірки і завдання.",
                             Format = "70х100/16",
+                            ImageUrl = "~/images/Kapeluh_tv_.png",
                             Language = "українська",
                             PagesAmount = 400,
                             Price = 80,
@@ -562,6 +516,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "м’яка ",
                             Description = "У посібнику розглянуто специфіку тележурналістики, особливості роботи журналіста на телебаченні, аудіовізуальні жанри, технологію підготовки окремих матеріалів, проблеми сучасного ефірного телемовлення, коротко пояснено телевізійну термінологію. Для студентів факультетів та відділень журналістики університетів, творчих працівників телебачення.",
                             Format = "60х84/16 ",
+                            ImageUrl = "~/images/Dmytrovsky_.png",
                             Language = "українська",
                             PagesAmount = 224,
                             Price = 50,
@@ -574,6 +529,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "тверда",
                             Description = "Автор розглядає інтернет-журналістику як історично четвертий (після преси, радіо і телебачення) різновид журналістики. Посібник містить практичні рекомендації стосовно підготовки і техніки написання матеріалів для новинно-аналітичних онлайнових ресурсів, а також прогнози розвитку мережевих медій.",
                             Format = "60х84/16",
+                            ImageUrl = "~/images/potjatynyk_.png",
                             Language = "українська",
                             PagesAmount = 246,
                             Price = 60,
@@ -586,6 +542,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "м’яка ",
                             Description = "У книзі з’ясовано вплив соціології на суспільну, передусім журналістську діяльність, проаналізовано використання соціологічних методів у журналістській практиці. Підручник дає загальне уявлення про соціологію як науку, про соціологічні методи збору інформації, про методику проведення конкретного соціологічного дослідження, про вплив соціологічної методики на роботу журналіста, значення соціології у журналістській діяльності.",
                             Format = "60х84/16 ",
+                            ImageUrl = "~/images/Lubkovich_.png",
                             Language = "українська",
                             PagesAmount = 232,
                             Price = 70,
@@ -598,6 +555,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "м’яка ",
                             Description = "У підручнику проаналізовано застосування методів соціальної психології у журналістській практиці, розкрито з соціально- психологічної точки зору журналістську методику збору інформації та спілкування журналіста з аудиторією. Для студентів вищих навчальних закладів, журналістів-практиків.",
                             Format = "60х84/16 ",
+                            ImageUrl = "~/images/Lubkovich_com_.png",
                             Language = "українська",
                             PagesAmount = 252,
                             Price = 70,
@@ -610,6 +568,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "м'яка",
                             Description = "Пропонована книга – перший у пострадянських країнах підручник, присвячений найважливішій частині теорії та практики журналізму: аналізу природи літературної праці у засобах масової інформації.",
                             Format = "60х84/16",
+                            ImageUrl = "~/images/zdorovega_.png",
                             Language = "українська",
                             PagesAmount = 276,
                             Price = 100,
@@ -622,6 +581,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "тверда",
                             Description = "Данное учебное пособие – это попытка представить журналистику как продукт духовной культуры общества, рассмотреть культурологические аспекты журналистики, ее место в глобальном контексте социокультурной динамики. Теоретико- методологическое осмысление особенностей журналистики как культурного феномена сопровождается организацией познавательной деятельности студентов при постановке и решении культурологических проблем на основе изучения первоисточников, ознакомления со спорными точками зрения. Учебное пособие носит междисциплинарный характер, хотя ориентировано, прежде всего, на студентов-журналистов, но, тем не менее, представляет интерес для специалистов самых разных научных направлений.",
                             Format = "60х84/16",
+                            ImageUrl = "~/images/Marjna_.png",
                             Language = "російська",
                             PagesAmount = 288,
                             Price = 70,
@@ -634,6 +594,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "м’яка",
                             Description = "У навчальному посібнику розглянуто соціальні параметри інноваційних процесів в англійській мові на початку ХХІ сторіччя, якісні зміни в шляхах, способах, тенденціях і механізмах збагачення словникового складу. Для студентів, аспірантів, викладачів, науковців.",
                             Format = "60х84/16",
+                            ImageUrl = "~/images/zacnyj_.png",
                             Language = "українська",
                             PagesAmount = 228,
                             Price = 50,
@@ -646,6 +607,7 @@ namespace PublishingHouse.DAL.Migrations
                             Cover = "тверда",
                             Description = "У навчальному посібнику вперше зроблено спробу комплексно висвітлити сучасну географію Великої Британії, її соціально- економічну й політичну історію, процес зародження та розвитку британської культури від найдавніших часів до сьогодення.",
                             Format = "60х84/16",
+                            ImageUrl = "~/images/GreateBritain_.png",
                             Language = "українська",
                             PagesAmount = 496,
                             Price = 100,
@@ -1021,6 +983,28 @@ namespace PublishingHouse.DAL.Migrations
                     b.ToTable("BookOrder");
                 });
 
+            modelBuilder.Entity("PublishingHouse.DAL.Entities.Cart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Carts");
+                });
+
             modelBuilder.Entity("PublishingHouse.DAL.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -1029,6 +1013,7 @@ namespace PublishingHouse.DAL.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -1058,6 +1043,9 @@ namespace PublishingHouse.DAL.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
@@ -1069,7 +1057,105 @@ namespace PublishingHouse.DAL.Migrations
 
                     b.HasIndex("BookId");
 
+                    b.HasIndex("CustomerId");
+
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("PublishingHouse.DAL.Entities.Customer", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("PublishingHouse.DAL.Entities.Notification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("PublishingHouse.DAL.Entities.Order", b =>
@@ -1079,17 +1165,35 @@ namespace PublishingHouse.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Deliver")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DeliverAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Orders");
                 });
@@ -1105,7 +1209,7 @@ namespace PublishingHouse.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("PublishingHouse.DAL.Entities.Customer", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1114,7 +1218,7 @@ namespace PublishingHouse.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("PublishingHouse.DAL.Entities.Customer", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1129,7 +1233,7 @@ namespace PublishingHouse.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("PublishingHouse.DAL.Entities.Customer", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1138,7 +1242,7 @@ namespace PublishingHouse.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("PublishingHouse.DAL.Entities.Customer", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1190,6 +1294,19 @@ namespace PublishingHouse.DAL.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("PublishingHouse.DAL.Entities.Cart", b =>
+                {
+                    b.HasOne("PublishingHouse.DAL.Entities.Book", "Book")
+                        .WithMany("Carts")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PublishingHouse.DAL.Entities.Customer", "Customer")
+                        .WithMany("Carts")
+                        .HasForeignKey("CustomerId");
+                });
+
             modelBuilder.Entity("PublishingHouse.DAL.Entities.Comment", b =>
                 {
                     b.HasOne("PublishingHouse.DAL.Entities.Book", "Book")
@@ -1197,6 +1314,17 @@ namespace PublishingHouse.DAL.Migrations
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("PublishingHouse.DAL.Entities.Customer", "Customer")
+                        .WithMany("Comments")
+                        .HasForeignKey("CustomerId");
+                });
+
+            modelBuilder.Entity("PublishingHouse.DAL.Entities.Order", b =>
+                {
+                    b.HasOne("PublishingHouse.DAL.Entities.Customer", "Customer")
+                        .WithMany("Orders")
+                        .HasForeignKey("CustomerId");
                 });
 #pragma warning restore 612, 618
         }

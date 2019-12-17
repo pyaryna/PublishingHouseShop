@@ -8,6 +8,7 @@ namespace PublishingHouse.DAL.Entities
     {
         public Book()
         {
+            Carts = new HashSet<Cart>();
             Comments = new HashSet<Comment>();
 
             BookAuthors = new HashSet<BookAuthor>();
@@ -16,7 +17,8 @@ namespace PublishingHouse.DAL.Entities
         }
 
         public int Id { get; set; }
-        public string Title { get; set; }    
+        public string Title { get; set; }
+        public string ImageUrl { get; set; }
         public string Language { get; set; }
         public int Year { get; set; }
         public string Format { get; set; }
@@ -25,6 +27,7 @@ namespace PublishingHouse.DAL.Entities
         public string Description { get; set; }
         public int Price { get; set; }
 
+        public ICollection<Cart> Carts { get; set; }
         public ICollection<Comment> Comments { get; set; }
 
         public ICollection<BookAuthor> BookAuthors { get; set; }

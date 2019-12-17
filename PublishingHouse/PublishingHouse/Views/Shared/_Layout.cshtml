@@ -1,48 +1,150 @@
-﻿<!DOCTYPE html>
+﻿@inject SignInManager<Customer> _signInManager;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - PublishingHouse</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+
+    <link rel="stylesheet" href="~/css/site.css">
+
+    <script src="https://kit.fontawesome.com/0256878591.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PublishingHouse</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <a href="main.html" class="logo"><img src="~/images/logo_white.png" class="img-fluid" alt="logo" /></a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 phones-div">
+                    <i class="fas fa-phone-alt"></i>
+                    <p class="phones">
+                        (032) 255-49-00 <br>
+                        (032) 261-24-15
+                    </p>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 email-div">
+                    <p>
+                        <i class="fas fa-envelope"></i>pais.druk@gmail.com<br>
+                        <i class="fab fa-facebook-square"></i>
+                        <a href="https://www.facebook.com/pais.com.ua/">Facebook</a>
+                    </p>
+                </div>
+                <div class="col-lg-3 login-div">
+                    @if (_signInManager.IsSignedIn(User))
+                    {
+                        <form method="post" asp-action="logout" asp-controller="account">
+                            <button type="submit" class="nav-link btn btn-link py-0">
+                                Вийти @User.Identity.Name
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <a asp-action="register" asp-controller="account">Зареєструватися</a><br>
+                        <a asp-action="login" asp-controller="account">Увійти</a>
+                    }
                 </div>
             </div>
-        </nav>
+        </div>
     </header>
-    <div class="container">
+
+    <div class="container-fluid navigation">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light ">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-action="Main" class="nav-link">Про нас</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-action="Index" class="nav-link">Наші видання</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-action="Publishing" class="nav-link">Видавництво</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-action="Design" class="nav-link">Дизайн-студія</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-action="Druk" class="nav-link">Цифровий друк</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-action="Contacts" class="nav-link">Контакти</a>
+                        </li>
+                        <li class="nav-item login-li">
+                            @if (_signInManager.IsSignedIn(User))
+                            {
+                                <form method="post" asp-action="logout" asp-controller="account">
+                                    <button type="submit" class="nav-link btn btn-link py-0">
+                                        Вийти @User.Identity.Name
+                                    </button>
+                                </form>
+                            }
+                            else
+                            {
+                                <a asp-action="register" asp-controller="account">Зареєструватися</a><br>
+                                <a asp-action="login" asp-controller="account">Увійти</a>
+                            }
+                        </li>
+                    </ul>
+                    @if (_signInManager.IsSignedIn(User) && !User.IsInRole("Admin"))
+                    {
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a asp-controller="Order" asp-action="OrdersForUser" class="nav-link">Кабінет</a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-controller="Cart" asp-action="Books" class="nav-link">Кошик</a>
+                            </li>
+                        </ul>
+                    }
+                    @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a asp-controller="Admin" asp-action="Books" class="nav-link">Управління</a>
+                            </li>
+                        </ul>
+                    }
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="container padding">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+
+    <footer class="container-fluid padding centered">
         <div class="container">
-            &copy; 2019 - PublishingHouse - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <p>&copy; Видавництво "ПАІС", 2019</p>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+    @if (IsSectionDefined("Scripts"))
+    {
+        @RenderSection("Scripts", required: true)
+    }
 </body>
 </html>

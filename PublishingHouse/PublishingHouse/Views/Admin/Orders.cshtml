@@ -1,0 +1,92 @@
+﻿@model List<OrderDto>
+
+@{
+    ViewBag.Title = "Замовлення";
+}
+
+<div class="handler padding">
+    <ul class="list-inline">
+        <li class="list-inline-item handler-item">
+            <a asp-controller="Admin" asp-action="Books" class="btn">Книги</a>
+        </li>
+        <li class="list-inline-item handler-item">
+            <a asp-controller="Admin" asp-action="Authors" class="btn">Автори</a>
+        </li>
+        <li class="list-inline-item handler-item">
+            <a asp-controller="Admin" asp-action="Categories" class="btn">Категорії</a>
+        </li>
+        <li class="list-inline-item handler-item">
+            <a asp-controller="Admin" asp-action="Customers" class="btn">Покупці</a>
+        </li>
+        <li class="list-inline-item handler-item">
+            <a asp-controller="Admin" asp-action="Orders" class="btn">Замовлення</a>
+        </li>
+        <li class="list-inline-item handler-item">
+            <a asp-controller="Admin" asp-action="Notices" class="btn">Повідомлення</a>
+        </li>
+    </ul>
+</div>
+<div>
+    <h2>Замовлення</h2>
+    @if (Model.Any())
+    {
+        <form>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Замовник</th>
+                        <th scope="col">Товари</th>
+                        <th scope="col">Сума</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-controller="order" asp-action="details" asp-route-id="@Model[i].Id">
+                                    @Model[i].Id
+                                </a>
+                            </td>
+                            <td>@Model[i].Customer.UserName</td>
+                            <td>
+                                @foreach (var book in Model[i].Books)
+                                {
+                                    <p>
+                                        @book.Title<br>
+                                    </p>
+                                }
+
+                            </td>
+                            <td>
+                                @Model[i].TotalSum
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <div>
+                                    <button type="submit" class="btn btn-danger m-1 form-submit"
+                                            asp-controller="Order" asp-action="Delete" asp-route-id="@Model[i].Id">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+
+        </form>
+
+    }
+    else
+    {
+        <p>
+            У Вас поки немає замовлень.
+        </p>
+    }
+</div>
+

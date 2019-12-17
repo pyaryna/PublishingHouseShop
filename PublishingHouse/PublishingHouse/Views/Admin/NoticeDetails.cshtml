@@ -1,0 +1,34 @@
+﻿@model NotificationDto
+
+@{
+    ViewBag.Title = "Деталі повідомлення";
+}
+
+<div class="container">
+    <h4 class="modal-title">Повідомлення</h4>
+    <p>
+        Ім'я: @Model.Name<br>
+        Прізвище: @Model.Email<br>
+        Номер телефону: @Model.Subject
+    </p>
+
+    <p>
+        @Model.Text
+    </p>
+
+    <form asp-controller="Admin" asp-action="DeleteNotice" asp-route-id="@Model.Id" method="post">
+
+        <span id="confirmDeleteSpan_@Model.Id" style="display:none">
+            <span>Ви впевнені, що хочете видалити?</span>
+            <button type="submit" class="btn btn-danger m-1">Так</button>
+            <a href="#" class="btn btn-primary m-1"
+               onclick="confirmDelete('@Model.Id', false)">Ні</a>
+        </span>
+
+        <span id="deleteSpan_@Model.Id">
+            <a href="#" class="btn btn-danger m-1"
+               onclick="confirmDelete('@Model.Id', true)">Видалити</a>
+        </span>
+    </form>
+
+</div>

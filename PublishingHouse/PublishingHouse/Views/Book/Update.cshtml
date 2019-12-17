@@ -1,0 +1,117 @@
+﻿@model UpdateBookDto
+
+@{
+    ViewBag.Title = "Редагувати книгу";
+}
+
+@{
+    var imagePath = Model.ExistingImagePath;
+}
+
+<form enctype="multipart/form-data" asp-controller="Book" asp-action="Update" method="post" class="mt-3">
+    <input hidden asp-for="Id" />
+    <input hidden asp-for="ExistingImagePath" />
+    <div class="form-group row">
+        <label asp-for="Title" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Title" class="form-control" placeholder="Title" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Language" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Language" class="form-control" placeholder="Language" />
+            <span asp-validation-for="Language" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Year" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Year" class="form-control" placeholder="Year" />
+            <span asp-validation-for="Year" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Format" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Format" class="form-control" placeholder="Format" />
+            <span asp-validation-for="Format" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Cover" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Cover" class="form-control" placeholder="Cover" />
+            <span asp-validation-for="Cover" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="PagesAmount" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="PagesAmount" class="form-control" placeholder="PagesAmount" />
+            <span asp-validation-for="PagesAmount" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Description" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <textarea asp-for="Description" class="form-control" placeholder="Description"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Price" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Price" class="form-control" placeholder="Price" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="AuthorId" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            @Html.DropDownListFor(x => x.AuthorId, Model.Authors, "Автор", new { @class = "form-control" })
+            <span asp-validation-for="AuthorId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="CategoryId" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            @Html.DropDownListFor(x => x.CategoryId, Model.Categories, "Категорія", new { @class = "form-control" })
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Image" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <div class="custom-file">
+                <input asp-for="Image" class="form-control custom-file-input" />
+                <label class="custom-file-label">Click here to change image</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row col-sm-4 offset-4">
+        <img src="@imagePath" asp-append-version="true" />
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-primary">
+            Update
+        </button>
+        <a asp-action="index" asp-controller="home" class="btn btn-primary">
+            Cancel
+        </a>
+    </div>
+
+    @section Scripts{
+        <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).next('.custom-file-label').html(fileName);
+                })
+            });
+        </script>
+    }
+</form>

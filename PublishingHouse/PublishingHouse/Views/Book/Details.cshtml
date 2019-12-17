@@ -1,0 +1,124 @@
+﻿@model BookDto
+@inject SignInManager<Customer> _signInManager;
+
+@{
+    ViewBag.Title = "Деталі книги";
+}
+
+<div class="container book-details">
+    <h4 class="modal-title">@Model.Title</h4>
+    <img src=@Model.ImageUrl class="padding book-image" alt="book image" asp-append-version="true" />
+    <p>
+        Автор:
+        @foreach (var author in @Model.Authors)
+        {
+            @author.Name<br>
+        }
+        Мова видання: @Model.Language<br>
+        Рік видання: @Model.Year<br>
+        Формат: @Model.Format<br>
+        Палітурка: @Model.Cover<br>
+        Обсяг: @Model.PagesAmount с.
+    </p>
+    <p>
+        @Model.Description
+    </p>
+    <p>
+        Ціна: @Model.Price грн
+    </p>
+    <div>
+        @if (!_signInManager.IsSignedIn(User))
+        {
+            <form asp-controller="Cart" asp-action="Add" asp-route-bookId="@Model.Id" method="post">
+                <button type="submit" class="btn btn-danger m-1">
+                    <i class="fas fa-shopping-cart"></i>
+                </button>
+            </form>
+        }
+
+        @if (_signInManager.IsSignedIn(User) && !User.IsInRole("Admin"))
+        {
+            <form asp-controller="Cart" asp-action="Add" asp-route-bookId="@Model.Id" method="post">
+                <button type="submit" class="btn btn-danger m-1"
+                        onclick="return alert('Книга: @Model.Title додана у кошик')">
+                    КУПИТИ
+                </button>
+            </form>
+        }
+
+        @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+        {
+            <form asp-controller="Book" asp-action="Delete" asp-route-id="@Model.Id" method="post">
+
+                <a class="btn btn-warning m-1" asp-controller="Book" asp-action="Update" asp-route-id="@Model.Id">
+                    Редагувати
+                </a>
+
+                <span id="confirmDeleteSpan_@Model.Id" style="display:none">
+                    <span>Ви впевнені, що хочете видалити?</span>
+                    <button type="submit" class="btn btn-danger m-1">Так</button>
+                    <a href="#" class="btn btn-primary m-1"
+                       onclick="confirmDelete('@Model.Id', false)">Ні</a>
+                </span>
+
+                <span id="deleteSpan_@Model.Id">
+                    <a href="#" class="btn btn-danger m-1"
+                       onclick="confirmDelete('@Model.Id', true)">Видалити</a>
+                </span>
+            </form>
+        }
+
+    </div>
+    <hr />
+    <div>
+        <h4>КОМЕНТАРІ</h4>
+        <form asp-controller="Comment" asp-action="Add" asp-route-bookId="@Model.Id" method="post">
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <textarea asp-for="AddComment.Text" class="form-control" placeholder="Залиште ваш коментар"></textarea>
+                    <span asp-validation-for="AddComment.Text" class="text-danger"></span>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-danger">
+                Опублікувати
+            </button>
+        </form>
+    </div>
+    @if (Model.Comments.Any())
+    {
+        foreach (var comment in Model.Comments)
+        {
+            <div class="card mb-3 mt-3">
+                <div class="card-header">
+                    @comment.Customer.Name
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@comment.Text</h5>
+                    <p>
+                        @comment.DateTime
+                    </p>
+                </div>
+                @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                {
+                    <div class="card-footer">
+                        <form asp-controller="Comment" asp-action="Delete"
+                              asp-route-id="@comment.Id" asp-route-bookId="@Model.Id"
+                              method="post">
+                            <span id="confirmDeleteSpan_@comment.Id" style="display:none">
+                                <span>Ви впевнені, що хочете видалити?</span>
+                                <button type="submit" class="btn btn-danger m-1">Так</button>
+                                <a href="#" class="btn btn-primary m-1"
+                                   onclick="confirmDelete('@comment.Id', false)">Ні</a>
+                            </span>
+
+                            <span id="deleteSpan_@comment.Id">
+                                <a href="#" class="btn btn-danger m-1"
+                                   onclick="confirmDelete('@comment.Id', true)">Видалити</a>
+                            </span>
+                        </form>
+                    </div>
+                }
+            </div>
+        }
+    }
+</div>
